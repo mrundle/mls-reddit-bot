@@ -1,7 +1,13 @@
 # mls-reddit-bot
 Reddit bot for r/MLS that pulls information from MLS and ESPN to post and maintain match threads. Automated via AWS Lambda.
 
-First you may need to install python dependencies:
+## Output
+
+https://www.reddit.com/r/MLS_Reddit_Bot/
+
+## Build and usage notes
+
+To build and package locally, you may need to install python dependencies:
 ```
 python3 -m pip install setuptools lambda-setuptools praw dateutils pytest pytz
 ```
