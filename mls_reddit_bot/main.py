@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
+# TODO move description to README.md, a lot of this is leftover from an early CLI version
 DESCRIPTION = f"""\
-This script fetches match details from the public MLS API for a given period
+This program fetches match details from the public MLS API for a given period
 of time. By default, it will use a window of -2 days and +5. To accept defaults,
 you can run the script with no arguments.
 
@@ -11,7 +12,7 @@ will break this script. The MLS API currently also does not require
 authentication, which is something else that could change in the future.
 
 This script attempts to make as few calls as possible to the API. Results are
-cached for multiple repeated calls.
+cached to/from S3 for multiple repeated calls over the same window.
 """
 
 import warnings
@@ -31,7 +32,7 @@ DEFAULT_TIMEZONE = 'US/Eastern'
 os.makedirs(DEFAULT_DATA_DIR, exist_ok=True) # TODO remove, not used
 
 
-# TODO verify environment variables
+# TODO assert environment variables (e.g. for praw/reddit)
 def main():
     reddit_cli = mls.reddit.get_reddit_client()
     subreddit = reddit_cli.subreddit(mls.reddit.REDDIT_SUBREDDIT)
@@ -69,19 +70,3 @@ def main():
                 title=f'Match thread: {m.away_team} @ {m.home_team}',
                 selftext=str(m))
             log.debug(f'Posted match thread https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission}')
-
-def lambda_handler(event, context):
-    try:
-        main()
-        return {
-            'statusCode': 200,
-            'body': 'OK',
-        }
-    except Exception as e:
-        return {
-            'statusCode': 400,
-            'body': str(e),
-        }
-
-if __name__ == '__main__':
-    main()
