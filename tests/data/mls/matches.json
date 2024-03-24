@@ -1,0 +1,68 @@
+[
+    {
+        "optaId": 2414914,
+        "slug": "stlvsdc-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 17012,
+            "fullName": "St. Louis CITY SC",
+            "slug": "st-louis-city-sc",
+            "shortName": "St. Louis",
+            "abbreviation": "STL"
+        },
+        "away": {
+            "optaId": 1326,
+            "fullName": "D.C. United",
+            "slug": "d-c-united",
+            "shortName": "D.C.",
+            "abbreviation": "DC",
+            "backgroundColor": "#212121"
+        },
+        "venue": {
+            "venueOptaId": "16335",
+            "backgroundImageSlug": "",
+            "name": "CITYPARK",
+            "city": "St. Louis, MO"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - MLS Season Pass",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-24T00:30:00.0000000Z",
+        "thirdPartyTickets": {
+            "url": "https://www.ticketmaster.com/event/Z7r9jZ1A77sud",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/st-louis-city-sc-vs-dc-united/umc.cse.5jffxbb4m04z8qubmgo9xu6mo?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    }
+]

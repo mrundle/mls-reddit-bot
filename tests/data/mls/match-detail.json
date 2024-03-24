@@ -1,0 +1,215 @@
+[
+    {
+        "created": 1703098219000,
+        "updated": 1710157958000,
+        "date": 1710034200000,
+        "timestamp": 1710888033000,
+        "first_half_start": 1710034810000,
+        "first_half_end": 1710037647000,
+        "second_half_start": 1710038600000,
+        "second_half_end": 1710041650000,
+        "extra_first_half_start": null,
+        "extra_first_half_end": null,
+        "extra_second_half_start": null,
+        "extra_second_half_end": null,
+        "minute_display": "90'+6'",
+        "is_final": true,
+        "is_aggregate": false,
+        "id": 8717501,
+        "opta_id": 2414888,
+        "sportec_id": "MLS-MAT-0004QE",
+        "elias_id": null,
+        "game_id": "2414888",
+        "season_id": 1047,
+        "previous_match_id": null,
+        "venue_id": 134771,
+        "venue_neutral": false,
+        "attendance": 20738,
+        "weather": null,
+        "date_tbd": false,
+        "time_tbd": false,
+        "type": "Regular",
+        "result_type": "NormalResult",
+        "result_reason": null,
+        "coverage_detail": null,
+        "period": "FullTime",
+        "minute": 96,
+        "first_half_minute": 48,
+        "second_half_minute": 96,
+        "extra_first_half_minute": null,
+        "extra_second_half_minute": null,
+        "round_name": null,
+        "round_number": 1,
+        "round_group": null,
+        "leg": null,
+        "matchday": 4,
+        "has_winner": false,
+        "postponed": false,
+        "abandoned": false,
+        "var_status": null,
+        "var_reason": null,
+        "venue": {
+            "created": 1615405845000,
+            "updated": 1615405845000,
+            "id": 134771,
+            "opta_id": 15488,
+            "sportec_id": "MLS-STA-000003",
+            "name": "Q2 Stadium",
+            "city": "Austin, TX",
+            "country": "USA",
+            "capacity": 20500,
+            "turf": "grass",
+            "postal_code": "78758",
+            "street_address": "10414 McKalla Place",
+            "phone": null,
+            "fax": null,
+            "email": null
+        },
+        "home_club_match": {
+            "created": 1703098220000,
+            "updated": 1710041691000,
+            "formation_matrix": [
+                [
+                    1
+                ],
+                [
+                    2,
+                    5,
+                    6,
+                    3
+                ],
+                [
+                    8,
+                    4
+                ],
+                [
+                    7,
+                    10,
+                    11
+                ],
+                [
+                    9
+                ]
+            ],
+            "current_formation_matrix": [
+                [
+                    1
+                ],
+                [
+                    2,
+                    5,
+                    6,
+                    3
+                ],
+                [
+                    8,
+                    4
+                ],
+                [
+                    7,
+                    10,
+                    11
+                ],
+                [
+                    9
+                ]
+            ],
+            "id": 17504357,
+            "match_id": 8717501,
+            "club_season_id": 3763012,
+            "club_kit_id": null,
+            "side": "home",
+            "formation": "4231",
+            "current_formation": "4231",
+            "first_penalty_kick": null,
+            "score": 2,
+            "shootout_score": null,
+            "extra_score": null,
+            "is_winner": false,
+            "is_loser": false,
+            "is_series_winner": null,
+            "is_series_loser": null
+        },
+        "home_club": {
+            "created": 1615405845000,
+            "updated": 1615405845000,
+            "id": 261248,
+            "opta_id": 15296,
+            "sportec_id": "MLS-CLU-000003",
+            "name": "Austin FC",
+            "abbreviation": "ATX",
+            "year_founded": 2021
+        },
+        "away_club_match": {
+            "created": 1703098220000,
+            "updated": 1710041691000,
+            "formation_matrix": [
+                [
+                    1
+                ],
+                [
+                    2,
+                    5,
+                    6,
+                    3
+                ],
+                [
+                    7,
+                    4,
+                    8,
+                    11
+                ],
+                [
+                    10,
+                    9
+                ]
+            ],
+            "current_formation_matrix": [
+                [
+                    1
+                ],
+                [
+                    2,
+                    5,
+                    6,
+                    3
+                ],
+                [
+                    7,
+                    4,
+                    8,
+                    11
+                ],
+                [
+                    10,
+                    9
+                ]
+            ],
+            "id": 17504358,
+            "match_id": 8717501,
+            "club_season_id": 3763014,
+            "club_kit_id": null,
+            "side": "away",
+            "formation": "442",
+            "current_formation": "442",
+            "first_penalty_kick": null,
+            "score": 2,
+            "shootout_score": null,
+            "extra_score": null,
+            "is_winner": false,
+            "is_loser": false,
+            "is_series_winner": null,
+            "is_series_loser": null
+        },
+        "away_club": {
+            "created": 1668613329000,
+            "updated": 1668613329000,
+            "id": 2326207,
+            "opta_id": 17012,
+            "sportec_id": "MLS-CLU-00001L",
+            "name": "St. Louis CITY SC",
+            "abbreviation": "STL",
+            "year_founded": 2019
+        }
+    }
+]
