@@ -15,7 +15,10 @@ import dateutil
 import pytz
 
 # this package
-from mls_reddit_bot import log
+try:
+    from mls_reddit_bot import log
+except:
+    import log
 
 DEFAULT_CATEGORIES = [ # match["competition"]["slug"]
     "mls-regular-season",
@@ -77,12 +80,12 @@ class MlsMatchSummary(object):
         dt = self.date.astimezone(tz=tz)
         return dt.strftime(f'%A %B %d %Y, %I:%M %p {dt.tzname()}')
 
-    def starts_in_n_minutes(self, n_minutes):
+    def is_under_n_minutes_to_start(self, n_minutes):
         now = datetime.datetime.now(datetime.timezone.utc)
         delta = self.date - now
         seconds_til_start = delta.total_seconds()
         minutes_til_start = int(seconds_til_start / 60)
-        return minutes_til_start == n_minutes
+        return minutes_til_start <= n_minutes
 
     def is_ended(self):
         return self.data["is_final"]

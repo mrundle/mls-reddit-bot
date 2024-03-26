@@ -30,7 +30,7 @@ ESPN_SOCCER_LEAGUE_CODES = {
 
 # if we haven't cached already, fetch json from a url
 def read_or_fetch_json(url, cachefile_basename):
-    cache_dir = './cached/'
+    cache_dir = '/tmp/cached/'
     os.makedirs(cache_dir, exist_ok=True)
     cachefile = os.path.join(cache_dir, cachefile_basename)
 

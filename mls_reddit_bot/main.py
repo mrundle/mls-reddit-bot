@@ -52,21 +52,35 @@ def main():
         data_directory,
         force)
 
+    scoreboard = mls.espn.EspnLeagueScoreboard("usa.1") # mls
+
     for m in matches:
         print(m)
-        if m.starts_in_n_minutes(5):
-            """
-            TODO:
-                1. Record created match threads (by id) in AWS DDB.
-                2. Keep attempting creation until success.
-                3. After match finishes, lock post and create post-match thread.
-                (Maybe)
-                4. Eventually: Log game stats and updates to each game thread,
-                via integration with fetch_match_details()
-                5. Move helper code into the lambda layer, clean up function.
-            """
-            log.debug(f'Posting match thread for match id {m.id}')
-            submission = subreddit.submit(
-                title=f'Match thread: {m.away_team} @ {m.home_team}',
-                selftext=str(m))
-            log.debug(f'Posted match thread https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission}')
+        if m.is_under_n_minutes_to_start(15):
+            entry = mls.ddb.DdbGameThread(m.id)
+            if entry.error:
+                continue
+            tid = entry.get_reddit_thread_id()
+            if not tid:
+                log.debug(f'Posting match thread for match id {m.id}')
+                submission = subreddit.submit(
+                    title=f'Match thread: {m.away_team} @ {m.home_team}',
+                    selftext=str(m))
+                if not entry.update_reddit_thread_id(submission):
+                    # s3 for backup? or query reddit for recently created
+                    log.error('failed to update ddb with reddit thread '
+                              'for game id {m.id}, duplicates inbound...')
+                log.debug(f'Posted match thread https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission}')
+            else:
+                """
+                TODO:
+                    1. check if game is over; if so, mark as much in ddb so we
+                    can stop checking (or maybe just check espn scoreboard first)
+                    2. after game ends, maybe lock post and create post-match
+                    thread. similarly, ddb should be updated with this info
+                    3. for in-progress or newly ended games, update match thread
+                    with latest summary from MLS/ESPN
+
+                NOTE: Match thread might be created before ESPN has information.
+                That's fine, just make sure the post doesn't get screwed up.
+                """

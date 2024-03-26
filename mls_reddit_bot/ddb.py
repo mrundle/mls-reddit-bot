@@ -2,7 +2,10 @@
 import boto3
 import json
 
-from mls_reddit_bot import log
+try:
+    from mls_reddit_bot import log
+except:
+    import log
 
 DDB = boto3.client('dynamodb')
 
