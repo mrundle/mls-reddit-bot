@@ -34,7 +34,9 @@ The lambda requires a few different resources and permissions to be in place:
 
 * aws, provided explicitly to the lambda function through aws policies
   * s3 bucket access
-  * (soon) ddb table access
+    * caches api results (and soon potentially reddit thread text)
+  * ddb table access
+    * keeps track of created match threads and related game status
 * environment variables set in the lambda context for reddit
   * `praw_client_id`
   * `praw_client_secret`
