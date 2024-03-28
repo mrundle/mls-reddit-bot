@@ -25,7 +25,9 @@ ldist:
 dist:
 	python3 setup.py sdist
 
+install: build
+	python3 setup.py install --user
+
 .PHONY: test
 test:
-	#python3 setup.py test
 	python3 -m pytest tests/

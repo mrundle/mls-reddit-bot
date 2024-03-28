@@ -2,6 +2,7 @@
 import boto3
 import json
 
+from mls_reddit_bot import constants
 try:
     from mls_reddit_bot import log
 except:
@@ -11,7 +12,7 @@ DDB = boto3.client('dynamodb')
 
 class DdbGameThread(object):
     def __init__(self, mls_game_id):
-        self.table_name = 'mls-matches'
+        self.table_name = constants.AWS_DDB_TABLE_NAME
         self.reddit_thread_id_field = 'reddit_submission_id'
         self.mls_game_id = mls_game_id
         self.key = {

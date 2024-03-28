@@ -14,41 +14,16 @@ import requests
 import dateutil
 import pytz
 
+from mls_reddit_bot import constants
 # this package
 try:
     from mls_reddit_bot import log
 except:
     import log
 
-DEFAULT_CATEGORIES = [ # match["competition"]["slug"]
-    "mls-regular-season",
-    "mls-cup-playoffs",
-    "mls-all-star-game",
-]
-
-SUPPORTED_CATEGORIES = [
-    "campeones-cup",
-    "canadian-championship",
-    "concacaf-champions-league",
-    "concacaf-nations-league",
-    "friendly",
-    "gold-cup",
-    "international-friendly",
-    "leagues-cup",
-    "mls-all-star-game",
-    "mls-cup-playoffs",
-    "mls-regular-season",
-    "other-club-friendlies",
-    "u-s-open-cup"
-]
-
-# XXX/TODO replicated across files, fix
-DEFAULT_DATA_DIR = '/tmp'
-DEFAULT_TIMEZONE = 'US/Eastern'
-
 
 class MlsMatchSummary(object):
-    def __init__(self, json_api_data, tz=DEFAULT_TIMEZONE):
+    def __init__(self, json_api_data, tz=constants.DEFAULT_TIMEZONE):
         self.data = json_api_data
         self.tz_str = tz
         # see ./schema-examples/match.json
@@ -80,12 +55,12 @@ class MlsMatchSummary(object):
         dt = self.date.astimezone(tz=tz)
         return dt.strftime(f'%A %B %d %Y, %I:%M %p {dt.tzname()}')
 
-    def is_under_n_minutes_to_start(self, n_minutes):
+    def minutes_til_start(self):
         now = datetime.datetime.now(datetime.timezone.utc)
         delta = self.date - now
         seconds_til_start = delta.total_seconds()
         minutes_til_start = int(seconds_til_start / 60)
-        return minutes_til_start <= n_minutes
+        return minutes_til_start
 
     def is_ended(self):
         return self.data["is_final"]
@@ -110,7 +85,7 @@ def fetch_matches(start_dt, end_dt, tz, categories, outdir, force):
     data = {}
 
     s3 = boto3.client('s3')
-    bucket = "mls-reddit-bot"
+    bucket = constants.AWS_S3_BUCKET_NAME
     key = f'mls-matches-{start_str}_{end_str}'
     data = {}
 

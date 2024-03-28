@@ -4,15 +4,18 @@ import sys
 
 DEBUG_LOGGING = True
 
-
-def warn(msg):
-    sys.stderr.write(f'WARNING: {msg}\n')
-
+def _log(lvl, msg):
+    sys.stderr.write(f'{lvl.upper()}: {msg}\n')
 
 def error(msg):
-    sys.stderr.write(f'ERROR: {msg}\n')
+    _log('ERROR', msg)
 
+def warn(msg):
+    _log('WARNING', msg)
+
+def info(msg):
+    _log('INFO', msg)
 
 def debug(msg):
     if DEBUG_LOGGING:
-        sys.stderr.write(f'DEBUG: {msg}\n')
+        _log('DEBUG', msg)

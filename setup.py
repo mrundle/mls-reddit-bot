@@ -1,5 +1,5 @@
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # for README.md
 def read(fname):
@@ -15,7 +15,7 @@ setup(
     license = "GPLv3",
     keywords = "reddit mls bot",
     url = "https://github.com/mrundle/mls-reddit-bot",
-    packages=["mls_reddit_bot", "tests"],
+    packages=find_packages(),
     long_description=read("README.md"),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -30,6 +30,10 @@ setup(
     # for creating lambda layer zip; https://pypi.org/project/lambda-setuptools/#description
     setup_requires=['lambda_setuptools'],
     #lambda_function="mls_reddit_bot.main:main",
+
+    entry_points = {
+        'console_scripts': ['mls-reddit-bot-cli=mls_reddit_bot.cli:cli_main'],
+    },
 
     ## tests
     tests_require=['pytest']

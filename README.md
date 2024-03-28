@@ -42,3 +42,19 @@ The lambda requires a few different resources and permissions to be in place:
   * `praw_client_secret`
   * `praw_password`
   * `praw_username`
+
+
+### Local CLI
+
+To install the package and `mls-reddit-bot-cli` wrapper locally:
+
+```
+$ make install | grep mls-reddit-bot-cli
+Installing mls-reddit-bot-cli script to /Users/mrundle/Library/Python/3.9/bin
+```
+
+Assuming this is on your path, you can simply run `mls-reddit-bot-cli` to execute
+the same main loop that will run under Lambda. This requires both of the following:
+
+1. PRAW credentials either exported as environment variables or stored in `~/.config/praw.ini`
+2. AWS credentials either exported as environment variables or stored as default in `~/.aws/config` and `~/.aws/credentials`

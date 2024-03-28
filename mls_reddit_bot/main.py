@@ -23,28 +23,75 @@ import os
 import sys
 
 # this package
-import mls_reddit_bot as mls
+from mls_reddit_bot import constants
+from mls_reddit_bot import ddb
+from mls_reddit_bot import espn
 from mls_reddit_bot import log
+from mls_reddit_bot import mls
+from mls_reddit_bot import reddit
 
-# general
-DEFAULT_DATA_DIR = '/tmp'
-DEFAULT_TIMEZONE = 'US/Eastern'
-os.makedirs(DEFAULT_DATA_DIR, exist_ok=True) # TODO remove, not used
 
+def process_match(m, espn_scoreboard):
+    if m.minutes_til_start() > constants.DEFAULT_MINUTES_TO_START:
+        print(f'not processing {m}, minutes_til_start={m.minutes_til_start()}')
+        return
+    print(f'processing {m}')
+    return
+
+    entry = ddb.DdbGameThread(m.id)
+    if entry.error:
+        log.error('failed to fetch game thread id from dynamodb')
+        return
+    tid = entry.get_reddit_thread_id()
+    if not tid:
+        log.debug(f'Posting match thread for match id {m.id}')
+        submission = subreddit.submit(
+            title=f'Match thread: {m.away_team} @ {m.home_team}',
+            selftext=str(m))
+        if not entry.update_reddit_thread_id(submission):
+            # s3 for backup? or query reddit for recently created
+            log.error('failed to update ddb with reddit thread '
+                      'for game id {m.id}, duplicates inbound...')
+        log.debug(f'Posted match thread https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission}')
+    else:
+        """
+        TODO:
+            1. check if game is over; if so, mark as much in ddb so we
+            can stop checking (or maybe just check espn scoreboard first)
+            2. after game ends, maybe lock post and create post-match
+            thread. similarly, ddb should be updated with this info
+            3. for in-progress or newly ended games, update match thread
+            with latest summary from MLS/ESPN
+
+        NOTE: Match thread might be created before ESPN has information.
+        That's fine, just make sure the post doesn't get screwed up.
+        """
+
+
+def process_matches(matches, scoreboard):
+    for match in matches:
+        process_match(match, scoreboard)
 
 # TODO assert environment variables (e.g. for praw/reddit)
-def main():
-    reddit_cli = mls.reddit.get_reddit_client()
-    subreddit = reddit_cli.subreddit(mls.reddit.REDDIT_SUBREDDIT)
+def main(
+        start=constants.DEFAULT_WINDOW_START,
+        end=constants.DEFAULT_WINDOW_END,
+        tz=None,
+        categories=None,
+        data_directory=None,
+        force=False):
+    if not tz:
+        tz = constants.DEFAULT_TIMEZONE
+    if not categories:
+        categories = constants.DEFAULT_MLS_CATEGORIES
+    if not data_directory:
+        data_directory = constants.DEFAULT_DATA_DIR
 
-    start = datetime.date.today() - datetime.timedelta(days=2)
-    end = datetime.date.today() + datetime.timedelta(days=5)
-    tz = DEFAULT_TIMEZONE
-    categories = mls.mls.DEFAULT_CATEGORIES
-    data_directory = DEFAULT_DATA_DIR
-    force = False
+    # instantiate reddit
+    reddit_cli = reddit.get_reddit_client()
+    subreddit = reddit_cli.subreddit(reddit.REDDIT_SUBREDDIT)
 
-    matches = mls.mls.fetch_matches(
+    matches = mls.fetch_matches(
         start,
         end,
         tz,
@@ -52,35 +99,9 @@ def main():
         data_directory,
         force)
 
-    scoreboard = mls.espn.EspnLeagueScoreboard("usa.1") # mls
+    if not matches:
+        log.info('no matches detected, returning')
 
-    for m in matches:
-        print(m)
-        if m.is_under_n_minutes_to_start(15):
-            entry = mls.ddb.DdbGameThread(m.id)
-            if entry.error:
-                continue
-            tid = entry.get_reddit_thread_id()
-            if not tid:
-                log.debug(f'Posting match thread for match id {m.id}')
-                submission = subreddit.submit(
-                    title=f'Match thread: {m.away_team} @ {m.home_team}',
-                    selftext=str(m))
-                if not entry.update_reddit_thread_id(submission):
-                    # s3 for backup? or query reddit for recently created
-                    log.error('failed to update ddb with reddit thread '
-                              'for game id {m.id}, duplicates inbound...')
-                log.debug(f'Posted match thread https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission}')
-            else:
-                """
-                TODO:
-                    1. check if game is over; if so, mark as much in ddb so we
-                    can stop checking (or maybe just check espn scoreboard first)
-                    2. after game ends, maybe lock post and create post-match
-                    thread. similarly, ddb should be updated with this info
-                    3. for in-progress or newly ended games, update match thread
-                    with latest summary from MLS/ESPN
+    scoreboard = espn.EspnLeagueScoreboard("usa.1") # mls
 
-                NOTE: Match thread might be created before ESPN has information.
-                That's fine, just make sure the post doesn't get screwed up.
-                """
+    process_matches(matches, scoreboard)
