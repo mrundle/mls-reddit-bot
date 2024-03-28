@@ -31,7 +31,7 @@ from mls_reddit_bot import mls
 from mls_reddit_bot import reddit
 
 
-def process_match(m, espn_scoreboard, subreddit):
+def process_match(m, espn_scoreboard, reddit_cli, subreddit):
     if m.minutes_til_start() > constants.DEFAULT_MINUTES_TO_START:
         print(f'not processing {m}, minutes_til_start={m.minutes_til_start()}')
         return
@@ -40,16 +40,16 @@ def process_match(m, espn_scoreboard, subreddit):
     if entry.error:
         log.error('failed to fetch game thread id from dynamodb')
         return
-    submission = entry.get_reddit_thread_id() # thread_id
-    if not submission:
+    submission_id = entry.get_reddit_thread_id() # thread_id
+    if not submission_id:
         submission = subreddit.submit(
             title=f'Match thread: {m.away_team} @ {m.home_team}',
             selftext=str(m))
-        if not entry.update_reddit_thread_id(submission):
+        if not entry.update_reddit_thread_id(submission.id):
             # s3 for backup? or query reddit for recently created
             log.error('failed to update ddb with reddit thread '
                       'for game id {m.id}, duplicates inbound...')
-        log.info(f'Posted match thread for match id {m.id}:  https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission}')
+        log.info(f'Posted match thread for match id {m.id}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission.id}')
     else:
         """
         TODO:
@@ -60,15 +60,22 @@ def process_match(m, espn_scoreboard, subreddit):
             3. for in-progress or newly ended games, update match thread
             with latest summary from MLS/ESPN
 
+            4. Create helper function to build the post body of a thread
+            based on MLS and ESPN data. The same function should be
+            used whether creating or editing a thread.
+
         NOTE: Match thread might be created before ESPN has information.
         That's fine, just make sure the post doesn't get screwed up.
         """
-        log.info(f'(TODO) Updating match thread for match id {m.id}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission}')
+        log.info(f'(TODO) Updating match thread for match id {m.id}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission_id}')
+        new_post_body = f'UPDATED: {str(m)}'
+        submission = reddit_cli.submission(submission_id)
+        submission = submission.edit(new_post_body)
 
 
-def process_matches(matches, scoreboard, subreddit):
+def process_matches(matches, scoreboard, reddit_cli, subreddit):
     for match in matches:
-        process_match(match, scoreboard, subreddit)
+        process_match(match, scoreboard, reddit_cli, subreddit)
 
 # TODO assert environment variables (e.g. for praw/reddit)
 def main(
@@ -101,4 +108,4 @@ def main(
     reddit_cli = reddit.get_reddit_client()
     subreddit = reddit_cli.subreddit(reddit.REDDIT_SUBREDDIT)
 
-    process_matches(matches, scoreboard, subreddit)
+    process_matches(matches, scoreboard, reddit_cli, subreddit)
