@@ -31,20 +31,17 @@ from mls_reddit_bot import mls
 from mls_reddit_bot import reddit
 
 
-def process_match(m, espn_scoreboard):
+def process_match(m, espn_scoreboard, subreddit):
     if m.minutes_til_start() > constants.DEFAULT_MINUTES_TO_START:
         print(f'not processing {m}, minutes_til_start={m.minutes_til_start()}')
         return
-    print(f'processing {m}')
-    return
 
     entry = ddb.DdbGameThread(m.id)
     if entry.error:
         log.error('failed to fetch game thread id from dynamodb')
         return
-    tid = entry.get_reddit_thread_id()
-    if not tid:
-        log.debug(f'Posting match thread for match id {m.id}')
+    submission = entry.get_reddit_thread_id() # thread_id
+    if not submission:
         submission = subreddit.submit(
             title=f'Match thread: {m.away_team} @ {m.home_team}',
             selftext=str(m))
@@ -52,7 +49,7 @@ def process_match(m, espn_scoreboard):
             # s3 for backup? or query reddit for recently created
             log.error('failed to update ddb with reddit thread '
                       'for game id {m.id}, duplicates inbound...')
-        log.debug(f'Posted match thread https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission}')
+        log.info(f'Posted match thread for match id {m.id}:  https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission}')
     else:
         """
         TODO:
@@ -66,11 +63,12 @@ def process_match(m, espn_scoreboard):
         NOTE: Match thread might be created before ESPN has information.
         That's fine, just make sure the post doesn't get screwed up.
         """
+        log.info(f'(TODO) Updating match thread for match id {m.id}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission}')
 
 
-def process_matches(matches, scoreboard):
+def process_matches(matches, scoreboard, subreddit):
     for match in matches:
-        process_match(match, scoreboard)
+        process_match(match, scoreboard, subreddit)
 
 # TODO assert environment variables (e.g. for praw/reddit)
 def main(
@@ -88,10 +86,6 @@ def main(
     if not data_directory:
         data_directory = constants.DEFAULT_DATA_DIR
 
-    # instantiate reddit
-    reddit_cli = reddit.get_reddit_client()
-    subreddit = reddit_cli.subreddit(reddit.REDDIT_SUBREDDIT)
-
     matches = mls.fetch_matches(
         start,
         end,
@@ -104,5 +98,7 @@ def main(
         log.info('no matches detected, returning')
 
     scoreboard = espn.EspnLeagueScoreboard("usa.1", prefer_cached_espn) # mls
+    reddit_cli = reddit.get_reddit_client()
+    subreddit = reddit_cli.subreddit(reddit.REDDIT_SUBREDDIT)
 
-    process_matches(matches, scoreboard)
+    process_matches(matches, scoreboard, subreddit)
