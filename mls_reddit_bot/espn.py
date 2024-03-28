@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # fetch all games
 #    https://site.web.api.espn.com/apis/v2/scoreboard/header?region=us&lang=en&contentorigin=espn&buyWindow=1m&showAirings=buy,live,replay&showZipLookup=true&tz=America/New_York&_ceID=15878776
 
@@ -9,6 +8,8 @@ import requests
 # pip
 import dateutil
 
+from mls_reddit_bot import constants
+from mls_reddit_bot import s3
 try:
     from mls_reddit_bot import log
 except:
@@ -27,31 +28,13 @@ ESPN_SOCCER_LEAGUE_CODES = {
     "usa.usl.1":            "USL Championship",
 }
 
-
-# if we haven't cached already, fetch json from a url
-def read_or_fetch_json(url, cachefile_basename):
-    cache_dir = '/tmp/cached/'
-    os.makedirs(cache_dir, exist_ok=True)
-    cachefile = os.path.join(cache_dir, cachefile_basename)
-
-    data = {}
-    try:
-        with open(cachefile, 'r') as f:
-            data = json.load(f)
-    except Exception as e:
-        pass
-
-    if not data:
-        response = requests.get(url)
-        data = response.json()
-        with open(cachefile, 'w') as f:
-            json.dump(data, f, indent=4)
-            print(f"wrote {cachefile} from fetched {url}")
-    return data
+def url_fetch_json(url):
+    log.info(f'fetching from {url}')
+    return requests.get(url).json()
 
 
 class EspnEvent(object):
-    def __init__(self, data):
+    def __init__(self, data, prefer_cached=False):
         self.data = data
         self.id = data['id']
         self.uid = data['uid']
@@ -63,6 +46,7 @@ class EspnEvent(object):
         self.status = data['status']
         self.venue = data['venue']
         self.links = data['links']
+        self.prefer_cached = prefer_cached
 
         # fetch summary
         self.summary = self.fetch()
@@ -87,9 +71,15 @@ class EspnEvent(object):
         #     standings
         #     videos
         data = {}
+        # TODO not hardcode usa.1 (if ever supporting non-mls)
         self.url = f'http://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/summary?event={self.id}'
-        cachefile = f'cached-event-summary-{self.id}.json'
-        return read_or_fetch_json(self.url, cachefile)
+        s3_bucket = constants.AWS_S3_BUCKET_NAME
+        s3_subdir = constants.AWS_S3_ESPN_SCOREBOARD_SUBDIR
+        s3_file = f'cached-event-summary-{self.id}.json'
+        if self.prefer_cached:
+            return s3.read_or_fetch_json(self.url, s3_bucket, f'{s3_subdir}/{s3_file}')
+        else:
+            return url_fetch_json(self.url)
 
     def print_verbose_commentary(self):
         commentary = self.summary['commentary']
@@ -165,11 +155,18 @@ class EspnEvent(object):
 
 
 class EspnLeagueScoreboard(object):
-    def __init__(self, league_code):
+    def __init__(self, league_code, prefer_cached=False):
         assert league_code in ESPN_SOCCER_LEAGUE_CODES.keys()
         self.league_code = league_code
         self.url = f'http://site.api.espn.com/apis/site/v2/sports/soccer/{self.league_code}/scoreboard'
-        self.data = read_or_fetch_json(self.url, f'cached-scoreboard-{league_code}.json')
+        s3_bucket = constants.AWS_S3_BUCKET_NAME
+        s3_subdir = constants.AWS_S3_ESPN_SCOREBOARD_SUBDIR
+        s3_file = f'cached-scoreboard-{league_code}.json'
+        self.prefer_cached = prefer_cached
+        if self.prefer_cached:
+            self.data = s3.read_or_fetch_json(self.url, s3_bucket, f'{s3_subdir}/{s3_file}')
+        else:
+            self.data = url_fetch_json(self.url)
         self.leagues = self.data['leagues'] # not much here, mainly logos
         # "season": {
         #     "type": 12328,
@@ -178,7 +175,7 @@ class EspnLeagueScoreboard(object):
         self.season = self.data['season']
         self.day = dateutil.parser.parse(self.data['day']['date']) # e.g. 2024-03-23
         self.events = [
-            EspnEvent(e) for e in self.data['events']
+            EspnEvent(e, self.prefer_cached) for e in self.data['events']
         ]
 
 
@@ -187,7 +184,7 @@ if __name__ == '__main__':
     scoreboard = EspnLeagueScoreboard("usa.1")
     for event in scoreboard.events:
         if 'stl' in event.shortName.lower():
-            with open('cached-event.json', 'w') as f:
+            with open('example-espn-event.json', 'w') as f:
                 json.dump(event.data, f, indent=4)
             #event.print_verbose_commentary()
             event.print_header()

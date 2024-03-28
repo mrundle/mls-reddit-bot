@@ -79,7 +79,8 @@ def main(
         tz=None,
         categories=None,
         data_directory=None,
-        force=False):
+        force_fetch_mls=None,
+        prefer_cached_espn=None):
     if not tz:
         tz = constants.DEFAULT_TIMEZONE
     if not categories:
@@ -97,11 +98,11 @@ def main(
         tz,
         categories,
         data_directory,
-        force)
+        force_fetch_mls)
 
     if not matches:
         log.info('no matches detected, returning')
 
-    scoreboard = espn.EspnLeagueScoreboard("usa.1") # mls
+    scoreboard = espn.EspnLeagueScoreboard("usa.1", prefer_cached_espn) # mls
 
     process_matches(matches, scoreboard)

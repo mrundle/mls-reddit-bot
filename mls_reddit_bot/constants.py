@@ -4,6 +4,8 @@ import os
 # aws resources
 AWS_DDB_TABLE_NAME = 'mls-matches'
 AWS_S3_BUCKET_NAME = 'mls-reddit-bot'
+AWS_S3_MATCH_DATA_SUBDIR = 'mls-match-data'
+AWS_S3_ESPN_SCOREBOARD_SUBDIR = 'espn-scoreboard' # caching disabled outside of --force testing, freshness is important here
 
 # use eastern time by default (TODO try to use local timezone per match)
 DEFAULT_TIMEZONE = 'US/Eastern'

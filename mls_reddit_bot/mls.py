@@ -1,10 +1,6 @@
 import warnings
 warnings.filterwarnings('ignore')
 
-# aws
-import boto3
-from botocore.exceptions import ClientError
-
 import datetime
 import json
 import os
@@ -15,6 +11,7 @@ import dateutil
 import pytz
 
 from mls_reddit_bot import constants
+from mls_reddit_bot import s3
 # this package
 try:
     from mls_reddit_bot import log
@@ -82,33 +79,11 @@ def fetch_matches(start_dt, end_dt, tz, categories, outdir, force):
     start_str = start_dt.strftime("%Y-%m-%d")
     end_str = end_dt.strftime("%Y-%m-%d")
 
-    data = {}
-
-    s3 = boto3.client('s3')
     bucket = constants.AWS_S3_BUCKET_NAME
-    key = f'mls-matches-{start_str}_{end_str}'
-    data = {}
-
-    try:
-        result = s3.get_object(Bucket=bucket, Key=key)
-        text = result["Body"].read().decode()
-        data = json.loads(text)
-    except ClientError as ex:
-        pass
-
-    # skip fetch if we already have, unless --force is requested
-    if data and not force:
-        log.debug(f'skipping fetch, data exists')
-    else:
-        # make the api call
-        data = []
-        url=f"https://sportapi.mlssoccer.com/api/matches?culture=en-us&dateFrom={start_str}&dateTo={end_str}"
-        log.debug(f'fetching from {url}')
-        response = requests.get(url)
-        data = response.json()
-
-        # write
-        s3.put_object(Bucket=bucket, Key=key, Body=json.dumps(data, indent=4))
+    subdir = constants.AWS_S3_MATCH_DATA_SUBDIR
+    key = f'{subdir}/mls-matches-{start_str}_{end_str}.json'
+    url=f"https://sportapi.mlssoccer.com/api/matches?culture=en-us&dateFrom={start_str}&dateTo={end_str}"
+    data = s3.read_or_fetch_json(url, bucket, key)
 
     # filter
     result = []

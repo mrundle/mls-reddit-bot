@@ -42,10 +42,14 @@ def parse_args():
     parser.add_argument("--show-categories",
                         action='store_true',
                         help="list all valid categories and exit")
-    parser.add_argument("-f", "--force",
+    parser.add_argument("--force-fetch-mls",
                         action='store_true',
-                        help="force a fetch of fresh data; by default, this" \
-                            "script prefers cached results")
+                        default=False,
+                        help="force fetch of MLS data (disabled by default)")
+    parser.add_argument("--prefer-cached-espn",
+                        action='store_true',
+                        default=False,
+                        help="try to use cached ESPN data (generally only for testing)")
     #parser.add_argument("-d", "--debug",
     #                    action='store_true',
     #                    help="show debug log messages")
@@ -82,5 +86,6 @@ def cli_main():
         tz=args.tz,
         categories=args.categories,
         data_directory=args.data_directory,
-        force=args.force,
+        force_fetch_mls=args.force_fetch_mls,
+        prefer_cached_espn=args.prefer_cached_espn,
     )
