@@ -18,12 +18,12 @@ def _get_bot_footer():
     tz = pytz.timezone('US/Central')
     ts = datetime.datetime.now().astimezone(tz).strftime("%Y-%m-%d %H:%M:%S %Z")
     text = '___\n'
-    text += f'*u/MLS_Reddit_Bot is a bot running via AWS Lambda ([github](https://github.com/mrundle/mls-reddit-bot)), utilizing MLS and ESPN APIs. Issues or feature requests can be submitted via [this quicklink](https://github.com/mrundle/mls-reddit-bot/issues/new/choose). This post was last updated at {ts}.*'
+    text += f'*u/MLS_Reddit_Bot is a bot running via AWS Lambda ([github](https://github.com/mrundle/mls-reddit-bot)), utilizing MLS and ESPN APIs. Issues or feature requests can be submitted [here](https://github.com/mrundle/mls-reddit-bot/issues/new/choose). This post was last updated at {ts}.*'
     return text
 
 def _get_espn_event_text(espn_event):
     text = '___\n'
-    text += 'Match events via [ESPN](https://www.espn.com/soccer/match?gameId={espn_event.id})\n'
+    text += f'Match events via [ESPN](https://www.espn.com/soccer/match?gameId={espn_event.id})\n'
     for event in espn_event.get_key_events():
         text += f'* {event}\n'
     return text
