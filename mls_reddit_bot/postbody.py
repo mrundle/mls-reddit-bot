@@ -12,7 +12,7 @@ def get_submission_title(mls_match, espn_event):
         postfix = 'Final'
     else:
         postfix = 'In Progress'
-    return f'Match thread: {mls_match.away_team_fullname} @ {mls_match.home_team_fullname} ({postfix})'
+    return f'Match Thread: {mls_match.away_team_fullname} @ {mls_match.home_team_fullname} ({postfix})'
 
 def _get_bot_footer():
     tz = pytz.timezone('US/Central')
@@ -23,9 +23,9 @@ def _get_bot_footer():
 
 def _get_espn_event_text(espn_event):
     text = ''
-    text += f'**Match events via [ESPN](https://www.espn.com/soccer/match?gameId={espn_event.id})**\n'
+    text += f'**Match events via [ESPN](https://www.espn.com/soccer/match?gameId={espn_event.id})**\n\n'
     for event in espn_event.get_key_events():
-        text += f'* {event}\n'
+        text += f'* {event}\n\n'
     return text
 
 def _get_lineups(espn_event):
