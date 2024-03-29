@@ -45,8 +45,11 @@ def _get_lineups(espn_event):
 
 def _get_match_summary(mls_match, espn_event, submission_id=None):
     text = '**Overview**\n\n'
-    text += f'Matchup: {mls_match.away_team_fullname} ({espn_event.away_team_score()}) @ {mls_match.home_team_fullname} ({espn_event.home_team_score()})\n\n'
-    if espn_event.is_completed():
+    if espn_event:
+        text += f'Matchup: {mls_match.away_team_fullname} ({espn_event.away_team_score()}) @ {mls_match.home_team_fullname} ({espn_event.home_team_score()})\n\n'
+    else:
+        text += f'Matchup: {mls_match.away_team_fullname} @ {mls_match.home_team_fullname}\n\n'
+    if espn_event and espn_event.is_completed():
         text += f'Status: Full time\n\n'
     elif mls_match.minutes_til_start > 0:
         text += f'Status: Starting soon\n\n'
@@ -62,9 +65,10 @@ def get_submission_body(mls_match, espn_event, submission_id=None):
     body = ''
     body += _get_match_summary(mls_match, espn_event, submission_id) + '\n\n'
     body += '___\n'
-    body += _get_espn_event_text(espn_event) + '\n\n'
-    body += '___\n'
-    body += _get_lineups(espn_event) + '\n\n'
-    body += '___\n'
+    if espn_event:
+        body += _get_espn_event_text(espn_event) + '\n\n'
+        body += '___\n'
+        body += _get_lineups(espn_event) + '\n\n'
+        body += '___\n'
     body += _get_bot_footer() + '\n\n'
     return body
