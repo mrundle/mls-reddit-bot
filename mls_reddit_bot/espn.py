@@ -115,6 +115,10 @@ class EspnEvent(object):
             except KeyError:
                 text = event['type']['text']
             try:
+                typetext = event['type']['text'].lower()
+            except:
+                typetext = ''
+            try:
                 scoring = event['scoringPlay']
             except KeyError:
                 scoring = False
@@ -123,6 +127,12 @@ class EspnEvent(object):
                 event_str += f'**{time}** '
             if scoring:
                 event_str += '⚽ '
+            if 'substitution' in typetext:
+                event_str += '🔄 '
+            if 'red card' in typetext:
+                event_str += '🟥 '
+            if 'yellow card' in typetext:
+                event_str += '🟨 '
             event_str += text
             event_strings.append(event_str)
         return event_strings

@@ -31,7 +31,7 @@ def _get_espn_event_text(espn_event):
 def get_submission_body(mls_match, espn_event, submission_id=None):
     body = f'{str(mls_match)}\n\n'
     if submission_id:
-        body = f'🔄 [Auto-refreshing reddit comments link](http://www.reddit-stream.com/comments/{submission_id})\n\n'
+        body = f'♻️[ Auto-refreshing reddit comments link](http://www.reddit-stream.com/comments/{submission_id})\n\n'
     body += _get_espn_event_text(espn_event) + '\n'
     body += _get_bot_footer() + '\n'
     return body
