@@ -27,6 +27,7 @@ from mls_reddit_bot import espn
 from mls_reddit_bot import log
 from mls_reddit_bot import mls
 from mls_reddit_bot import reddit
+from mls_reddit_bot import postbody
 
 
 def find_espn_data_for_match(mls_match, espn_scoreboard):
@@ -39,6 +40,10 @@ def find_espn_data_for_match(mls_match, espn_scoreboard):
     return None
 
 
+# TODO:
+#    - what happens if the thread is locked, archived, or deleted?
+#         in this case, we shouldn't try to recreate, and should mark as closed
+#    - mark thread closed after game ends, and leave it alone
 def process_match(mls_match, espn_scoreboard, reddit_cli, subreddit):
     if mls_match.minutes_til_start() > constants.DEFAULT_MINUTES_TO_START:
         print(f'not processing {mls_match}, minutes_til_start={mls_match.minutes_til_start()}')
@@ -48,13 +53,18 @@ def process_match(mls_match, espn_scoreboard, reddit_cli, subreddit):
     if entry.error:
         log.error('failed to fetch game thread id from dynamodb')
         return
+
+    espn_data = find_espn_data_for_match(mls_match, espn_scoreboard)
     submission_id = entry.get_reddit_thread_id() # thread_id
+    submission_title = postbody.get_submission_title(mls_match, espn_data)
+    submission_body = postbody.get_submission_body(mls_match, espn_data)
+
     if not submission_id:
-        submission = subreddit.submit(
-            title=f'Match thread: {mls_match.away_team} @ {mls_match.home_team}',
-            selftext=str(mls_match))
+        submission = subreddit.submit(title=submission_title, selftext=submission_body)
         if not entry.update_reddit_thread_id(submission.id):
-            # s3 for backup? or query reddit for recently created
+            # TODO: s3 for backup? or query reddit for recently created
+            # for now, write a fresh copy every time, but we should refuse to write
+            # if the new text is significantly (or any) shorter than the old
             log.error('failed to update ddb with reddit thread '
                       'for game id {mls_match.id}, duplicates inbound...')
         log.info(f'Posted match thread for match id {mls_match.id}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission.id}')
@@ -77,11 +87,11 @@ def process_match(mls_match, espn_scoreboard, reddit_cli, subreddit):
         NOTE: Match thread might be created before ESPN has information.
         That's fine, just make sure the post doesn't get screwed up.
         """
-        espn_data = find_espn_data_for_match(mls_match, espn_scoreboard)
-        log.info(f'(TODO) Updating match thread for match id {mls_match.id}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission_id}')
-        new_post_body = f'UPDATED: {str(mls_match)}'
+        log.info(f'Updating match thread for match id {mls_match.id}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission_id}')
+        # now that we have the submission_id, recreate the body
+        submission_body = postbody.get_submission_body(mls_match, espn_data, submission_id)
         submission = reddit_cli.submission(submission_id)
-        submission = submission.edit(new_post_body)
+        submission = submission.edit(submission_body)
 
 
 def process_matches(matches, scoreboard, reddit_cli, subreddit):

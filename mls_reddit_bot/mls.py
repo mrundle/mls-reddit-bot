@@ -63,9 +63,6 @@ class MlsMatchSummary(object):
         minutes_til_start = int(seconds_til_start / 60)
         return minutes_til_start
 
-    def is_ended(self):
-        return self.data["is_final"]
-
 
 # TODO use this, more granular stats
 def fetch_match_details(id, outdir):

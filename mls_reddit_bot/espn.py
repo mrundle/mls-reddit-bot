@@ -106,6 +106,21 @@ class EspnEvent(object):
             time = item['time']['displayValue']
             print(f'{time}: {text}')
 
+    def get_key_events(self):
+        event_strings = []
+        for event in self.summary['keyEvents']:
+            time = event['clock']['displayValue']
+            try:
+                text = event['text']
+            except KeyError:
+                text = event['type']['text']
+            event_str = ''
+            if time:
+                event_str += f'{time} '
+            event_str += text
+            event_strings.append(event_str)
+        return event_strings
+
     def print_key_events(self):
         print('Key events:')
         events = self.summary['keyEvents']
