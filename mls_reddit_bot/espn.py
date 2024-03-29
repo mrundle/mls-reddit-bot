@@ -65,6 +65,7 @@ class EspnEvent(object):
         # fetch summary
         self.summary = self.fetch()
         self.header = self.get_header()
+        self.rosters = self.summary.get('rosters', [])
 
     def fetch(self):
         # fetches match summary, which has the following top-level keys
