@@ -1,0 +1,1606 @@
+[
+    {
+        "optaId": 289017199,
+        "slug": "lbmvsazm-03-21-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 163380186,
+            "fullName": "Lubbock Matadors",
+            "slug": "lubbock-matadors",
+            "shortName": "Lubbock Matadors",
+            "abbreviation": "LBM",
+            "backgroundColor": "",
+            "logoBWSlug": "",
+            "logoColorSlug": "webcomp_4a0c9b14-df80-4bf6-a57e-f2ee600050d5",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1710946574/assets/US-cup-teams-logos/Lubbock_Matadors_SC_nv228s.png",
+            "crestColorSlug": ""
+        },
+        "away": {
+            "optaId": 163380187,
+            "fullName": "Arizona Monsoon FC",
+            "slug": "arizona-monsoon-fc",
+            "shortName": "Arizona Monsoon FC",
+            "abbreviation": "AZM",
+            "backgroundColor": "",
+            "logoBWSlug": "",
+            "logoColorSlug": "webcomp_7edc8997-c07a-4787-9afd-d4ba6986b024",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1710946773/assets/US-cup-teams-logos/Arizona_Monsoon_FC_480x480_lvecrh.png",
+            "crestColorSlug": ""
+        },
+        "venue": {
+            "venueOptaId": "373420139",
+            "backgroundImageSlug": "",
+            "name": "LCU Soccer Field",
+            "city": "Lubbock, TX"
+        },
+        "season": {
+            "slug": "u-s-open-cup-2024",
+            "optaId": 2024,
+            "competitionId": 557,
+            "name": "2024"
+        },
+        "competition": {
+            "optaId": 557,
+            "name": "U.S. Open Cup",
+            "slug": "u-s-open-cup",
+            "shortName": "U.S. Open Cup",
+            "matchType": "",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [],
+        "sponsorImage": {},
+        "matchDate": "2024-03-22T00:30:00.0000000Z",
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 0,
+        "roundGroup": "",
+        "matchDay": "1",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 289017173,
+        "slug": "colvsazt-03-21-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 19194,
+            "fullName": "Colorado Rapids 2",
+            "slug": "colorado-rapids-2",
+            "shortName": "Colorado Rapids 2",
+            "abbreviation": "COL",
+            "backgroundColor": "#82273B",
+            "logoBWSlug": "",
+            "logoColorSlug": "webcomp_4612705b-a052-4c98-b66b-3b09d3f4df9e",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1645628284/assets/mnp/logos/clubs/COL-Logo-480.png",
+            "crestColorSlug": ""
+        },
+        "away": {
+            "optaId": 12708,
+            "fullName": "Azteca",
+            "slug": "azteca-fc",
+            "shortName": "Azteca FC",
+            "abbreviation": "AZT",
+            "backgroundColor": "#212121",
+            "logoBWSlug": "",
+            "logoColorSlug": "",
+            "crestColorSlug": ""
+        },
+        "venue": {
+            "venueOptaId": "3357",
+            "backgroundImageSlug": "",
+            "name": "Dick's Sporting Goods Park",
+            "city": "Commerce City, Colorado"
+        },
+        "season": {
+            "slug": "u-s-open-cup-2024",
+            "optaId": 2024,
+            "competitionId": 557,
+            "name": "2024"
+        },
+        "competition": {
+            "optaId": 557,
+            "name": "U.S. Open Cup",
+            "slug": "u-s-open-cup",
+            "shortName": "U.S. Open Cup",
+            "matchType": "",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [],
+        "sponsorImage": {},
+        "matchDate": "2024-03-22T01:30:00.0000000Z",
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 0,
+        "roundGroup": "",
+        "matchDay": "1",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2413972,
+        "slug": "panvsmex-03-21-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 1869,
+            "fullName": "Panama",
+            "slug": "panama",
+            "shortName": "Panama",
+            "abbreviation": "PAN",
+            "backgroundColor": "#212121",
+            "logoBWSlug": "",
+            "logoColorSlug": "webcomp_98cfc311-882d-4884-b45a-3a7a47e4f4a3",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1634308540/assets/flags/panama-480px.png",
+            "crestColorSlug": ""
+        },
+        "away": {
+            "optaId": 659,
+            "fullName": "Mexico",
+            "slug": "mexico",
+            "shortName": "Mexico",
+            "abbreviation": "MEX",
+            "backgroundColor": "#212121",
+            "logoBWSlug": "",
+            "logoColorSlug": "webcomp_1081113a-9a6b-4e9c-a833-177398612f71",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1634308539/assets/flags/mexico-480px.png",
+            "crestColorSlug": ""
+        },
+        "venue": {
+            "venueOptaId": "5789",
+            "backgroundImageSlug": "",
+            "name": "AT&T Stadium",
+            "city": "Arlington, Texas"
+        },
+        "season": {
+            "slug": "concacaf-nations-league-season-2023-2024",
+            "optaId": 2023,
+            "competitionId": 974,
+            "name": "Season 2023/2024"
+        },
+        "competition": {
+            "optaId": 974,
+            "name": "Concacaf Nations League",
+            "slug": "concacaf-nations-league",
+            "shortName": "Nations League",
+            "matchType": "",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [],
+        "sponsorImage": {},
+        "matchDate": "2024-03-22T02:15:00.0000000Z",
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "Semi-Finals",
+        "roundNumber": 4,
+        "roundGroup": "",
+        "matchDay": "10",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 289017174,
+        "slug": "vcfcvsirv-03-21-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 12135,
+            "fullName": "Ventura County FC",
+            "slug": "la-galaxy-ii",
+            "shortName": "Ventura County",
+            "abbreviation": "VCFC",
+            "backgroundColor": "#04255E",
+            "logoBWSlug": "",
+            "logoColorSlug": "webcomp_97f7a676-35ea-4291-bfe2-3fe3737acf71",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1710868641/assets/mnp/logos/clubs/Ventura_County_480x480_bmc1mn.png",
+            "crestColorSlug": ""
+        },
+        "away": {
+            "optaId": 163380142,
+            "fullName": "Irvine Zeta FC",
+            "slug": "irvine-zeta-fc",
+            "shortName": "Irvine Zeta FC",
+            "abbreviation": "IRV",
+            "backgroundColor": "",
+            "logoBWSlug": "",
+            "logoColorSlug": "webcomp_3274bb34-9d9c-4cd6-976f-c2b2ab062da2",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1710902146/assets/US-cup-teams-logos/Irvine_Zeta_FC_480x480_sqawy6.png",
+            "crestColorSlug": ""
+        },
+        "venue": {
+            "venueOptaId": "3356",
+            "backgroundImageSlug": "",
+            "name": "Dignity Health Sports Park",
+            "city": "Carson, CA"
+        },
+        "season": {
+            "slug": "u-s-open-cup-2024",
+            "optaId": 2024,
+            "competitionId": 557,
+            "name": "2024"
+        },
+        "competition": {
+            "optaId": 557,
+            "name": "U.S. Open Cup",
+            "slug": "u-s-open-cup",
+            "shortName": "U.S. Open Cup",
+            "matchType": "",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [],
+        "sponsorImage": {},
+        "matchDate": "2024-03-22T02:30:00.0000000Z",
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 0,
+        "roundGroup": "",
+        "matchDay": "1",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2414909,
+        "slug": "nevschi-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 928,
+            "fullName": "New England Revolution",
+            "slug": "new-england-revolution",
+            "shortName": "New England",
+            "abbreviation": "NE",
+            "backgroundColor": "#0C2340",
+            "logoBWSlug": "webcomp_6eb2275d-b3d2-4311-b4a6-73d0055946d1",
+            "logoColorSlug": "webcomp_c9f96b12-6107-4b4a-bbb4-b75ce3d1347d",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1639491780/assets/ner/logos/NE-Logo-New-480px-v2.png",
+            "crestColorSlug": "webcomp_b83046f6-a2dd-4f24-9d96-08703c422042"
+        },
+        "away": {
+            "optaId": 1207,
+            "fullName": "Chicago Fire FC",
+            "slug": "chicago-fire-fc",
+            "shortName": "Chicago",
+            "abbreviation": "CHI",
+            "backgroundColor": "#141946",
+            "logoBWSlug": "webcomp_37d78f9a-31c1-4aa2-96e7-14d9b5f86847",
+            "logoColorSlug": "webcomp_ae953999-88ac-4bfe-8d6f-10010d649cad",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1633358356/assets/logos/CHI_Logo_480x480-2021-v2.png",
+            "crestColorSlug": "webcomp_4323e5d2-b6f8-4c6e-a6d9-0033445af1eb"
+        },
+        "venue": {
+            "venueOptaId": "2656",
+            "backgroundImageSlug": "",
+            "name": "Gillette Stadium",
+            "city": "Foxborough, MA"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - MLS Season Pass",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-23T18:00:00.0000000Z",
+        "firstPartyTickets": {
+            "url": "https://www.ticketmaster.com/new-england-revolution-vs-chicago-fire-foxborough-massachusetts-03-23-2024/event/01005F95C12E40AB",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/new-england-revolution-vs-chicago-fire-fc/umc.cse.11te94js0yg7vvxgsiompg0sl?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2414910,
+        "slug": "rbnyvsmia-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 399,
+            "fullName": "New York Red Bulls",
+            "slug": "new-york-red-bulls",
+            "shortName": "New York",
+            "abbreviation": "RBNY",
+            "backgroundColor": "#BA0C2F",
+            "logoBWSlug": "webcomp_274350b9-e39e-493b-971a-0177265ce0dd",
+            "logoColorSlug": "webcomp_774a8c39-7348-4f4f-b92d-5dec8d4b5a21",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1614970744/assets/logos/399-ny-red-bulls-logo_o6xw9r.png",
+            "crestColorSlug": "webcomp_fe0dcb09-145c-430e-9b09-2d114db751d3"
+        },
+        "away": {
+            "optaId": 14880,
+            "fullName": "Inter Miami CF",
+            "slug": "inter-miami-cf",
+            "shortName": "Miami",
+            "abbreviation": "MIA",
+            "backgroundColor": "#212322",
+            "logoBWSlug": "webcomp_67e7f2c7-e631-4355-950c-4bc3c10bdb21",
+            "logoColorSlug": "webcomp_15509514-e261-43f0-9b44-284b34236321",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1614970761/assets/logos/14880-miami-logo_m0n453.png",
+            "crestColorSlug": "webcomp_235c0a61-f516-4036-b693-ed09a21ad154"
+        },
+        "venue": {
+            "venueOptaId": "6604",
+            "backgroundImageSlug": "",
+            "name": "Red Bull Arena",
+            "city": "Harrison, NJ"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - MLS Season Pass",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-23T18:00:00.0000000Z",
+        "firstPartyTickets": {
+            "url": "https://www.ticketmaster.com/new-york-red-bulls-vs-inter-harrison-new-jersey-03-23-2024/event/00005F948939113A",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/new-york-red-bulls-vs-inter-miami-cf/umc.cse.2rvjqdxk45on9jskbbe6a0i75?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2413989,
+        "slug": "canvstat-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 597,
+            "fullName": "Canada",
+            "slug": "canada",
+            "shortName": "Canada",
+            "abbreviation": "CAN",
+            "backgroundColor": "#99160c",
+            "logoBWSlug": "",
+            "logoColorSlug": "webcomp_f0d98d3e-f1a1-4d24-9538-4fc607ce3555",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1634308535/assets/flags/canada-480px.png",
+            "crestColorSlug": ""
+        },
+        "away": {
+            "optaId": 1794,
+            "fullName": "Trinidad and Tobago",
+            "slug": "trinidad-and-tobago",
+            "shortName": "T&T",
+            "abbreviation": "TRI",
+            "backgroundColor": "#212121",
+            "logoBWSlug": "",
+            "logoColorSlug": "webcomp_525f6128-3fe1-4e10-9974-656eebddfaef",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1615817734/assets/flags/tt_d1mbzo.png",
+            "crestColorSlug": ""
+        },
+        "venue": {
+            "venueOptaId": "3202",
+            "backgroundImageSlug": "",
+            "name": "Toyota Stadium",
+            "city": "Frisco, Texas"
+        },
+        "season": {
+            "slug": "concacaf-nations-league-season-2023-2024",
+            "optaId": 2023,
+            "competitionId": 974,
+            "name": "Season 2023/2024"
+        },
+        "competition": {
+            "optaId": 974,
+            "name": "Concacaf Nations League",
+            "slug": "concacaf-nations-league",
+            "shortName": "Nations League",
+            "matchType": "",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [],
+        "sponsorImage": {},
+        "matchDate": "2024-03-23T20:00:00.0000000Z",
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "Play-Offs",
+        "roundNumber": 3,
+        "roundGroup": "",
+        "matchDay": "9",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2413990,
+        "slug": "crivshon-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 838,
+            "fullName": "Costa Rica",
+            "slug": "costa-rica",
+            "shortName": "Costa Rica",
+            "abbreviation": "CRC",
+            "backgroundColor": "#212121",
+            "logoBWSlug": "",
+            "logoColorSlug": "webcomp_8223c6ab-b28e-4503-ad21-80c829cf3da8",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1634308536/assets/flags/costa-rica-480px.png",
+            "crestColorSlug": ""
+        },
+        "away": {
+            "optaId": 847,
+            "fullName": "Honduras",
+            "slug": "honduras",
+            "shortName": "Honduras",
+            "abbreviation": "HON",
+            "backgroundColor": "#212121",
+            "logoBWSlug": "",
+            "logoColorSlug": "webcomp_0344573f-e24c-4288-89d9-91a8d5a037b6",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1634308537/assets/flags/honduras-480px.png",
+            "crestColorSlug": ""
+        },
+        "venue": {
+            "venueOptaId": "3202",
+            "backgroundImageSlug": "",
+            "name": "Toyota Stadium",
+            "city": "Frisco, Texas"
+        },
+        "season": {
+            "slug": "concacaf-nations-league-season-2023-2024",
+            "optaId": 2023,
+            "competitionId": 974,
+            "name": "Season 2023/2024"
+        },
+        "competition": {
+            "optaId": 974,
+            "name": "Concacaf Nations League",
+            "slug": "concacaf-nations-league",
+            "shortName": "Nations League",
+            "matchType": "",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [],
+        "sponsorImage": {},
+        "matchDate": "2024-03-23T23:15:00.0000000Z",
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "Play-Offs",
+        "roundNumber": 3,
+        "roundGroup": "",
+        "matchDay": "9",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2414907,
+        "slug": "cltvsclb-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 16629,
+            "fullName": "Charlotte FC",
+            "slug": "charlotte-fc",
+            "shortName": "Charlotte",
+            "abbreviation": "CLT",
+            "backgroundColor": "#0085ca",
+            "logoBWSlug": "webcomp_f1c94120-4161-49eb-a952-1f28192b2018",
+            "logoColorSlug": "webcomp_061bc316-81a2-4d95-a882-5ec32aebca95",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1634242594/assets/logos/CLT_Logo_480x480v2.png",
+            "crestColorSlug": "webcomp_bdf7c9ae-0e1c-43ea-8b8b-9bff07869ee6"
+        },
+        "away": {
+            "optaId": 454,
+            "fullName": "Columbus Crew",
+            "slug": "columbus-crew",
+            "shortName": "Columbus",
+            "abbreviation": "CLB",
+            "backgroundColor": "#757575",
+            "logoBWSlug": "webcomp_1817d3e8-428d-4250-b4f0-59c58760d46a",
+            "logoColorSlug": "webcomp_03c98b7e-976f-4a33-a626-995b89aa7e80",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1621373535/assets/logos/CLB-Logo-New-480.png",
+            "crestColorSlug": "webcomp_9c0c3eba-b78c-408c-af11-5587360ad173"
+        },
+        "venue": {
+            "venueOptaId": "2126",
+            "backgroundImageSlug": "",
+            "name": "Bank of America Stadium",
+            "city": "Charlotte, NC"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - MLS Season Pass",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-23T23:30:00.0000000Z",
+        "firstPartyTickets": {
+            "url": "https://www.ticketmaster.com/charlotte-fc-vs-columbus-crew-charlotte-north-carolina-03-23-2024/event/2D005F93E30A4D96",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/charlotte-fc-vs-columbus-crew/umc.cse.59s3v0n9flniu802amm2i2uio?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2414908,
+        "slug": "cinvsnyc-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 11504,
+            "fullName": "FC Cincinnati",
+            "slug": "fc-cincinnati",
+            "shortName": "Cincinnati",
+            "abbreviation": "CIN",
+            "backgroundColor": "#003087",
+            "logoBWSlug": "webcomp_093edcd5-74d9-4da2-93f8-d464f7169dd4",
+            "logoColorSlug": "webcomp_553d2bce-a8cd-4cce-ada2-b6e07c74dc28",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1620997960/assets/logos/CIN-Logo-480px.png",
+            "crestColorSlug": "webcomp_41e2f018-d1fe-482e-bd36-9d2a02da24a0"
+        },
+        "away": {
+            "optaId": 9668,
+            "fullName": "New York City FC",
+            "slug": "new-york-city-football-club",
+            "shortName": "New York City",
+            "abbreviation": "NYC",
+            "backgroundColor": "#9fd2ff",
+            "logoBWSlug": "webcomp_61b53353-e70f-47cb-914c-c10bc180633f",
+            "logoColorSlug": "webcomp_0ed8730e-a94b-4e87-8316-21ed951f8967",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1709593596/assets/logos/Primary-Club-Logo-480x480-cqrlan.png",
+            "crestColorSlug": "webcomp_d015713a-ad2c-4b5f-b63f-55d90c8f5982"
+        },
+        "venue": {
+            "venueOptaId": "15489",
+            "backgroundImageSlug": "",
+            "name": "TQL Stadium",
+            "city": "Cincinnati, OH"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - Free",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-23T23:30:00.0000000Z",
+        "firstPartyTickets": {
+            "url": "https://seatgeek.com/fc-cincinnati-tickets/mls/2024-03-23-7-30-pm/6307308",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "thirdPartyTickets": {
+            "url": "https://www.ticketmaster.com/event/Z7r9jZ1A77YP3",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/fc-cincinnati-vs-new-york-city-football-club/umc.cse.517qh1h5xl546goxozcopj53r?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2414911,
+        "slug": "orlvsatx-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 6900,
+            "fullName": "Orlando City",
+            "slug": "orlando-city-sc",
+            "shortName": "Orlando",
+            "abbreviation": "ORL",
+            "backgroundColor": "#61259E",
+            "logoBWSlug": "webcomp_3e90d4f0-6195-43d7-9d77-da4c1d7e3f65",
+            "logoColorSlug": "webcomp_9499966a-5150-4e9e-9df8-e3254b265584",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1614970757/assets/logos/6900-orlando-logo_tfcjmq.png",
+            "crestColorSlug": "webcomp_93928d77-288d-4606-8c86-6920962f1e71"
+        },
+        "away": {
+            "optaId": 15296,
+            "fullName": "Austin FC",
+            "slug": "austin-fc",
+            "shortName": "Austin",
+            "abbreviation": "ATX",
+            "backgroundColor": "#0BAC44",
+            "logoBWSlug": "webcomp_9a2edba8-e187-4e39-a434-140896f1e9b5",
+            "logoColorSlug": "webcomp_9fe50f89-c55f-47c7-b405-09d803fa5227",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1614970762/assets/logos/15296-austin-logo_dcqfgn.png",
+            "crestColorSlug": "webcomp_83f263dd-a78f-41ae-92ee-e48f68c9b575"
+        },
+        "venue": {
+            "venueOptaId": "11698",
+            "backgroundImageSlug": "",
+            "name": "INTER&CO Stadium",
+            "city": "Orlando, FL"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - MLS Season Pass",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-23T23:30:00.0000000Z",
+        "firstPartyTickets": {
+            "url": "https://www.ticketmaster.com/orlando-city-sc-v-austin-fc-orlando-florida-03-23-2024/event/22006022CFB9137F",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/orlando-city-vs-austin-fc/umc.cse.49hztb93fd6jeahdrani1b400?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2414912,
+        "slug": "torvsatl-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 2077,
+            "fullName": "Toronto FC",
+            "slug": "toronto-fc",
+            "shortName": "Toronto",
+            "abbreviation": "TOR",
+            "backgroundColor": "#AE132A",
+            "logoBWSlug": "webcomp_658b7bba-a482-488b-81cd-aafa5f3fd812",
+            "logoColorSlug": "webcomp_29911d2a-d905-4574-95ce-8e6c3cf19521",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1614970755/assets/logos/2077-toronto-fc-logo_gx1gtb.png",
+            "crestColorSlug": "webcomp_43678e7c-dc6e-4aeb-b751-9c0ba4274906"
+        },
+        "away": {
+            "optaId": 11091,
+            "fullName": "Atlanta United",
+            "slug": "atlanta-united",
+            "shortName": "Atlanta",
+            "abbreviation": "ATL",
+            "backgroundColor": "#9D2235",
+            "logoBWSlug": "webcomp_0b739f0a-d006-4f9a-8f4a-50da344c7682",
+            "logoColorSlug": "webcomp_3179d38a-a997-4c57-ae8a-68bac03335eb",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1620997957/assets/logos/ATL-Logo-480px.png",
+            "crestColorSlug": "webcomp_1ceb0722-eaf6-45b3-945d-c07586c978dc"
+        },
+        "venue": {
+            "venueOptaId": "3355",
+            "backgroundImageSlug": "",
+            "name": "BMO Field",
+            "city": "Toronto, ON"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - MLS Season Pass",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-23T23:30:00.0000000Z",
+        "firstPartyTickets": {
+            "url": "https://www.ticketmaster.ca/toronto-fc-vs-atlanta-united-fc-toronto-ontario-03-23-2024/event/10006037FD8F2A69",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/toronto-fc-vs-atlanta-united/umc.cse.5h90i8il6tfh9imqdlxtkqrve?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2414920,
+        "slug": "vanvsrsl-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 1708,
+            "fullName": "Vancouver Whitecaps FC",
+            "slug": "vancouver-whitecaps-fc",
+            "shortName": "Vancouver",
+            "abbreviation": "VAN",
+            "backgroundColor": "#002244",
+            "logoBWSlug": "webcomp_32b98038-9825-4376-9484-c46a4443394f",
+            "logoColorSlug": "webcomp_cb5dfcb6-1002-4510-b279-0c108d8401d9",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1614970751/assets/logos/1708-vancouver-logo_znac8n.png",
+            "crestColorSlug": "webcomp_47dd04e2-186b-4ef0-a2e7-b2e5050e265e"
+        },
+        "away": {
+            "optaId": 1899,
+            "fullName": "Real Salt Lake",
+            "slug": "real-salt-lake",
+            "shortName": "Salt Lake",
+            "abbreviation": "RSL",
+            "backgroundColor": "#001E61",
+            "logoBWSlug": "webcomp_35672ef3-a975-4e9d-a458-96270b5bfb6f",
+            "logoColorSlug": "webcomp_f7cbc2c6-6640-4562-b994-6559396e10af",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1625175977/assets/logos/RSL-Logo-480px_j5pblf.png",
+            "crestColorSlug": "webcomp_f7cbc2c6-6640-4562-b994-6559396e10af"
+        },
+        "venue": {
+            "venueOptaId": "7740",
+            "backgroundImageSlug": "",
+            "name": "BC Place",
+            "city": "Vancouver, BC"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - Free",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-23T23:30:00.0000000Z",
+        "firstPartyTickets": {
+            "url": "https://www.ticketmaster.ca/vancouver-whitecaps-fc-vs-real-salt-vancouver-british-columbia-03-23-2024/event/1100602DC9ED2427",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [
+            {
+                "type": "tag",
+                "_translationId": "094823a8-3337-4c8c-b6b7-4a50cba7f72c",
+                "_entityId": "ff647a7e-7923-4667-b806-6c0e1cbc05e4",
+                "selfUrl": "https://forge-dapi.mls-prd.deltatre.digital/v2/content/en-us/tags/flux-test",
+                "title": "flux-test",
+                "slug": "flux-test",
+                "neutralSlug": "flux-test",
+                "externalSourceReference": {},
+                "fields": {}
+            },
+            {
+                "type": "tag",
+                "_translationId": "79efbe7d-8b6d-4094-b52a-9f2619a8f434",
+                "_entityId": "c9f0119b-8636-488b-8f05-343e975c52fe",
+                "selfUrl": "https://forge-dapi.mls-prd.deltatre.digital/v2/content/en-us/tags/flux-testv2",
+                "title": "flux-testv2",
+                "slug": "flux-testv2",
+                "neutralSlug": "flux-testv2",
+                "externalSourceReference": {},
+                "fields": {}
+            }
+        ],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/vancouver-whitecaps-fc-vs-real-salt-lake/umc.cse.2k365zkef5w1guwzltd199mov?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2415221,
+        "slug": "skcvsla-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 421,
+            "fullName": "Sporting Kansas City",
+            "slug": "sporting-kansas-city",
+            "shortName": "Kansas City",
+            "abbreviation": "SKC",
+            "backgroundColor": "#0C2340",
+            "logoBWSlug": "webcomp_3eee8541-16f1-4dfc-a366-b6b4d19e4a30",
+            "logoColorSlug": "webcomp_5227c7e9-ad7e-402d-a910-160052addcf4",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1614970745/assets/logos/421-sporting-kc-logo_pyhxo8.png",
+            "crestColorSlug": "webcomp_164c77dc-f6f3-47a3-bac4-002202ba0a11"
+        },
+        "away": {
+            "optaId": 1230,
+            "fullName": "LA Galaxy",
+            "slug": "la-galaxy",
+            "shortName": "LA",
+            "abbreviation": "LA",
+            "backgroundColor": "#004B87",
+            "logoBWSlug": "webcomp_b18f064c-5843-4a56-9b8b-15246d317e2e",
+            "logoColorSlug": "webcomp_0dfebd51-1d40-46cb-b13c-39ae6cb16f54",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1620997961/assets/logos/LA-Logo-480px.png",
+            "crestColorSlug": "webcomp_bbaa016d-ef06-4219-973b-a05158425761"
+        },
+        "venue": {
+            "venueOptaId": "7329",
+            "backgroundImageSlug": "",
+            "name": "Children's Mercy Park",
+            "city": "Kansas City, Kansas"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - MLS Season Pass",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-24T00:30:00.0000000Z",
+        "firstPartyTickets": {
+            "url": "https://seatgeek.com/sporting-kansas-city-tickets/mls/2024-03-23-7-30-pm/6122273",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "thirdPartyTickets": {
+            "url": "https://www.ticketmaster.com/event/Z7r9jZ1A77s14",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/sporting-kansas-city-vs-la-galaxy/umc.cse.97phdj3f8cs13c1hchnumcye?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2414914,
+        "slug": "stlvsdc-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 17012,
+            "fullName": "St. Louis CITY SC",
+            "slug": "st-louis-city-sc",
+            "shortName": "St. Louis",
+            "abbreviation": "STL",
+            "backgroundColor": "#E80A4D",
+            "logoBWSlug": "webcomp_8ed163c5-b4ff-4dc8-ba3b-4552544c9087",
+            "logoColorSlug": "webcomp_545922e1-f6f4-4a0d-8302-5c7fbf6130b0",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1632227611/assets/logos/STL-Logo-800_fxwprk.png",
+            "crestColorSlug": "webcomp_69458b23-bf47-403b-9703-fca10fdc5e7e"
+        },
+        "away": {
+            "optaId": 1326,
+            "fullName": "D.C. United",
+            "slug": "d-c-united",
+            "shortName": "D.C.",
+            "abbreviation": "DC",
+            "backgroundColor": "#212121",
+            "logoBWSlug": "webcomp_75edf7c2-02fe-47d5-bc77-a9868e76ca6d",
+            "logoColorSlug": "webcomp_1e67a2a4-1952-450e-8c96-dac105e6cb82",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1614970749/assets/logos/1326-dc-united-logo_pwc97q.png",
+            "crestColorSlug": "webcomp_b6c29a0f-aaef-4c66-bd31-c509392649ad"
+        },
+        "venue": {
+            "venueOptaId": "16335",
+            "backgroundImageSlug": "",
+            "name": "CITYPARK",
+            "city": "St. Louis, MO"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - MLS Season Pass",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-24T00:30:00.0000000Z",
+        "firstPartyTickets": {
+            "url": "https://seatgeek.com/st-louis-city-sc-3-tickets/mls/2024-03-23-7-30-pm/6303595?aid=15927&pid=web&rid=401&utm_medium=partnership&utm_source=stl_tickets&utm_campaign=web",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "thirdPartyTickets": {
+            "url": "https://www.ticketmaster.com/event/Z7r9jZ1A77sud",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/st-louis-city-sc-vs-dc-united/umc.cse.5jffxbb4m04z8qubmgo9xu6mo?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2414915,
+        "slug": "colvshou-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 436,
+            "fullName": "Colorado Rapids",
+            "slug": "colorado-rapids",
+            "shortName": "Colorado",
+            "abbreviation": "COL",
+            "backgroundColor": "#8A2432",
+            "logoBWSlug": "webcomp_b51660a4-4015-4a32-b1c5-f47c95c9ca66",
+            "logoColorSlug": "webcomp_c9a9244f-09e3-4e68-a741-3f88948a1c9c",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1614970746/assets/logos/436-colorado-logo_yifx69.png",
+            "crestColorSlug": "webcomp_99232c2a-d3a1-47b6-bda1-10ec2a9cacfe"
+        },
+        "away": {
+            "optaId": 1897,
+            "fullName": "Houston Dynamo FC",
+            "slug": "houston-dynamo-fc",
+            "shortName": "Houston",
+            "abbreviation": "HOU",
+            "backgroundColor": "#101820",
+            "logoBWSlug": "webcomp_4fc9b640-d1cc-4e11-be0f-e2d2bae8c5ec",
+            "logoColorSlug": "webcomp_31d424ad-8390-4717-9fda-3c79847f1711",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1614970752/assets/logos/1897-houston-logo_mwdpxd.png",
+            "crestColorSlug": "webcomp_7c50c14c-f139-496b-a4a6-02597df1a415"
+        },
+        "venue": {
+            "venueOptaId": "3357",
+            "backgroundImageSlug": "",
+            "name": "Dick's Sporting Goods Park",
+            "city": "Commerce City, Colorado"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - MLS Season Pass",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-24T01:30:00.0000000Z",
+        "firstPartyTickets": {
+            "url": "https://www.ticketmaster.com/colorado-rapids-vs-houston-dynamo-fc-commerce-city-colorado-03-23-2024/event/1E005F9287080D3D",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/colorado-rapids-vs-houston-dynamo-fc/umc.cse.3eipaep7lkabvg1fupvixo9e2?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2414917,
+        "slug": "lafcvsnsh-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 11690,
+            "fullName": "Los Angeles Football Club",
+            "slug": "los-angeles-football-club",
+            "shortName": "LAFC",
+            "abbreviation": "LAFC",
+            "backgroundColor": "#212121",
+            "logoBWSlug": "webcomp_1a2ee9e1-cac2-4f2b-b771-620376f002ee",
+            "logoColorSlug": "webcomp_6f982df3-b4a5-44f2-a950-a2a3148a914c",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1620998598/assets/logos/LAFC-Logo-480px.png",
+            "crestColorSlug": "webcomp_d81f7b0b-8c59-49ce-8c59-ee5afe10aa03"
+        },
+        "away": {
+            "optaId": 15154,
+            "fullName": "Nashville SC",
+            "slug": "nashville-sc",
+            "shortName": "Nashville",
+            "abbreviation": "NSH",
+            "backgroundColor": "#201547",
+            "logoBWSlug": "webcomp_b3d805f5-5d7f-4926-a65c-29ae08493cd0",
+            "logoColorSlug": "webcomp_87c8320f-6bff-4247-ac84-580963d205c5",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1614970761/assets/logos/15154-nashville-logo_ldatso.png",
+            "crestColorSlug": "webcomp_9de3cddb-d099-4e7a-a21f-35ef63ce0699"
+        },
+        "venue": {
+            "venueOptaId": "12919",
+            "backgroundImageSlug": "",
+            "name": "BMO Stadium",
+            "city": "Los Angeles, CA"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - MLS Season Pass",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-24T02:30:00.0000000Z",
+        "firstPartyTickets": {
+            "url": "https://www.ticketmaster.com/los-angeles-football-club-vs-nashville-los-angeles-california-03-23-2024/event/0A0060239A5413D2",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/los-angeles-football-club-vs-nashville-sc/umc.cse.5nkqoovrponhtvuim6yatl0d0?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2414918,
+        "slug": "porvsphi-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 1581,
+            "fullName": "Portland Timbers",
+            "slug": "portland-timbers",
+            "shortName": "Portland",
+            "abbreviation": "POR",
+            "backgroundColor": "#004812",
+            "logoBWSlug": "webcomp_e8545a05-ee03-49db-a7eb-9e1318240244",
+            "logoColorSlug": "webcomp_91c9ad8e-91ee-4a8b-ba99-3d317006dcc7",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1626094359/assets/logos/POR-Logo-480px_xh4gvt.png",
+            "crestColorSlug": "webcomp_4d2e72bd-527c-454b-a8b9-472cbfe5e890"
+        },
+        "away": {
+            "optaId": 5513,
+            "fullName": "Philadelphia Union",
+            "slug": "philadelphia-union",
+            "shortName": "Philadelphia",
+            "abbreviation": "PHI",
+            "backgroundColor": "#041c2c",
+            "logoBWSlug": "webcomp_5033df5a-f2dd-4d54-a023-970ab81ec759",
+            "logoColorSlug": "webcomp_b69fdee0-e31b-4e72-b095-d8ae3e277b98",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1614970756/assets/logos/5513-philadelphia-logo_ea33hb.png",
+            "crestColorSlug": "webcomp_d0a30390-f72f-4a8d-aca1-520c6dcc3b1b"
+        },
+        "venue": {
+            "venueOptaId": "7239",
+            "backgroundImageSlug": "",
+            "name": "Providence Park",
+            "city": "Portland, Oregon"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - MLS Season Pass",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-24T02:30:00.0000000Z",
+        "firstPartyTickets": {
+            "url": "https://seatgeek.com/portland-timbers-tickets/mls/2024-03-23-7-30-pm/6294286",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "thirdPartyTickets": {
+            "url": "https://www.ticketmaster.com/event/Z7r9jZ1A77svE",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/portland-timbers-vs-philadelphia-union/umc.cse.1uaz987vsc8ybe8qmkr1rqmb1?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    },
+    {
+        "optaId": 2414919,
+        "slug": "sjvssea-03-23-2024",
+        "leagueMatchTitle": "",
+        "home": {
+            "optaId": 1131,
+            "fullName": "San Jose Earthquakes",
+            "slug": "san-jose-earthquakes",
+            "shortName": "San Jose",
+            "abbreviation": "SJ",
+            "backgroundColor": "#0051BA",
+            "logoBWSlug": "webcomp_24d54b48-b5a6-43ba-8824-615f085973a9",
+            "logoColorSlug": "webcomp_45f398dc-e8fc-4254-b910-da3db401682e",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1620997962/assets/logos/SJ-Logo-480px.png",
+            "crestColorSlug": "webcomp_53d88900-4e12-4596-a3e8-045e178182d5"
+        },
+        "away": {
+            "optaId": 3500,
+            "fullName": "Seattle Sounders FC",
+            "slug": "seattle-sounders-fc",
+            "shortName": "Seattle",
+            "abbreviation": "SEA",
+            "backgroundColor": "#2dc84d",
+            "logoBWSlug": "webcomp_d48039f4-62b6-445a-bcb7-fe2f76e003f2",
+            "logoColorSlug": "webcomp_a5251f90-8f18-4517-b3d3-5aa5f66696dc",
+            "logoColorUrl": "https://images.mlssoccer.com/image/upload/{formatInstructions}/v1702319240/assets/sea/logos/SEA2023-Full_Color-480x480_fk6mpu.png",
+            "crestColorSlug": "webcomp_54004f6d-5a0e-45ba-84b7-2333f6802125"
+        },
+        "venue": {
+            "venueOptaId": "10424",
+            "backgroundImageSlug": "",
+            "name": "PayPal Park",
+            "city": "San Jose, CA"
+        },
+        "season": {
+            "slug": "us-major-league-soccer-season-2024-2025",
+            "optaId": 2024,
+            "competitionId": 98,
+            "name": "Season 2024/2025"
+        },
+        "competition": {
+            "optaId": 98,
+            "name": "MLS Regular Season",
+            "slug": "mls-regular-season",
+            "shortName": "Regular Season",
+            "matchType": "Regular",
+            "logoLight": {
+                "slug": ""
+            },
+            "logoDark": {
+                "slug": ""
+            },
+            "blockHeaderName": "",
+            "mgmId": "",
+            "playerHeadshotThumbnailField": ""
+        },
+        "broadcasters": [
+            {
+                "broadcasterTypeLabel": "",
+                "broadcasterName": "Apple TV - MLS Season Pass",
+                "broadcasterStreamingURL": "https://tv.apple.com/channel/tvs.sbd.7000",
+                "broadcasterType": "International Streaming"
+            }
+        ],
+        "sponsorImage": {},
+        "matchDate": "2024-03-24T02:30:00.0000000Z",
+        "firstPartyTickets": {
+            "url": "https://www.ticketmaster.com/san-jose-earthquakes-vs-seattle-sounders-fc/event/1C005F92E7FD2F28",
+            "openInNewTab": true,
+            "isVisible": false
+        },
+        "tags": [],
+        "homeClubBroadcasters": [],
+        "awayClubBroadcasters": [],
+        "clubBroadcasters": [],
+        "isTimeTbd": false,
+        "mgmId": "",
+        "appleStreamURL": "https://tv.apple.com/us/sporting-event/san-jose-earthquakes-vs-seattle-sounders-fc/umc.cse.5stsvkwuywvq08ddzda2m148s?ctx_brand=tvs.sbd.7000",
+        "appleSubscriptionTier": "",
+        "appleAdvertisementCategory": "",
+        "roundName": "",
+        "roundNumber": 1,
+        "roundGroup": "",
+        "matchDay": "6",
+        "delayedMatch": false
+    }
+]

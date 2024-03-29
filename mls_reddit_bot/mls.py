@@ -26,8 +26,12 @@ class MlsMatchSummary(object):
         # see ./schema-examples/match.json
         d = self.data
         self.id = d["optaId"]
-        self.home_team = d["home"]["fullName"]
-        self.away_team = d["away"]["fullName"]
+        self.home_team_fullname = d["home"]["fullName"]
+        self.away_team_fullname = d["away"]["fullName"]
+        self.home_team_abbrev = d["home"]["abbreviation"]
+        self.away_team_abbrev = d["away"]["abbreviation"]
+        self.home_team_short = d["home"]["shortName"]
+        self.away_team_short = d["away"]["shortName"]
         self.venue = d["venue"]["name"]
         self.city = d["venue"]["city"]
         if d["isTimeTbd"]:
@@ -41,7 +45,7 @@ class MlsMatchSummary(object):
             Saturday March 23 2024, 08:30 PM EDT: D.C. United @ St. Louis CITY SC (CITYPARK, St. Louis, MO)
         """
         ts = self.start_timestamp()
-        return f'{ts}: {self.away_team} @ {self.home_team} ({self.venue}, {self.city})'
+        return f'{ts}: {self.away_team_fullname} @ {self.home_team_fullname} ({self.venue}, {self.city})'
 
     def start_timestamp(self):
         """

@@ -9,6 +9,10 @@ from mls_reddit_bot import log
 
 s3 = None
 
+def write_json(bucket, key, data):
+    log.info(f'caching data to s3://{bucket}/{key}')
+    s3.put_object(Bucket=bucket, Key=key, Body=json.dumps(data, indent=4))
+
 # if we haven't already cached, fetch json from a url
 def read_or_fetch_json(url, bucket, key, force=False):
     global s3
@@ -33,7 +37,6 @@ def read_or_fetch_json(url, bucket, key, force=False):
         data = response.json()
 
         # write
-        log.info(f'caching data to s3://{bucket}/{key}')
-        s3.put_object(Bucket=bucket, Key=key, Body=json.dumps(data, indent=4))
+        write_json(bucket, key, data)
 
     return data

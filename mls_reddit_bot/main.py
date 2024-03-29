@@ -18,9 +18,7 @@ cached to/from S3 for multiple repeated calls over the same window.
 import warnings
 warnings.filterwarnings('ignore')
 
-import datetime
-import os
-import sys
+import json
 
 # this package
 from mls_reddit_bot import constants
@@ -31,25 +29,35 @@ from mls_reddit_bot import mls
 from mls_reddit_bot import reddit
 
 
-def process_match(m, espn_scoreboard, reddit_cli, subreddit):
-    if m.minutes_til_start() > constants.DEFAULT_MINUTES_TO_START:
-        print(f'not processing {m}, minutes_til_start={m.minutes_til_start()}')
+def find_espn_data_for_match(mls_match, espn_scoreboard):
+    for espn_event in espn_scoreboard.events:
+        if mls_match.away_team_abbrev == espn_event.away_team_abbrev \
+                and mls_match.away_team_abbrev == espn_event.away_team_abbrev:
+                log.info(f'found espn data for {mls_match.away_team_short} @ {mls_match.home_team_short}')
+                return espn_event
+    log.error(f'could not find espn data for {mls_match.away_team_short} @ {mls_match.home_team_short}')
+    return None
+
+
+def process_match(mls_match, espn_scoreboard, reddit_cli, subreddit):
+    if mls_match.minutes_til_start() > constants.DEFAULT_MINUTES_TO_START:
+        print(f'not processing {mls_match}, minutes_til_start={mls_match.minutes_til_start()}')
         return
 
-    entry = ddb.DdbGameThread(m.id)
+    entry = ddb.DdbGameThread(mls_match.id)
     if entry.error:
         log.error('failed to fetch game thread id from dynamodb')
         return
     submission_id = entry.get_reddit_thread_id() # thread_id
     if not submission_id:
         submission = subreddit.submit(
-            title=f'Match thread: {m.away_team} @ {m.home_team}',
-            selftext=str(m))
+            title=f'Match thread: {mls_match.away_team} @ {mls_match.home_team}',
+            selftext=str(mls_match))
         if not entry.update_reddit_thread_id(submission.id):
             # s3 for backup? or query reddit for recently created
             log.error('failed to update ddb with reddit thread '
-                      'for game id {m.id}, duplicates inbound...')
-        log.info(f'Posted match thread for match id {m.id}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission.id}')
+                      'for game id {mls_match.id}, duplicates inbound...')
+        log.info(f'Posted match thread for match id {mls_match.id}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission.id}')
     else:
         """
         TODO:
@@ -64,11 +72,14 @@ def process_match(m, espn_scoreboard, reddit_cli, subreddit):
             based on MLS and ESPN data. The same function should be
             used whether creating or editing a thread.
 
+            5. Create logic to join mls game id with ESPN data
+
         NOTE: Match thread might be created before ESPN has information.
         That's fine, just make sure the post doesn't get screwed up.
         """
-        log.info(f'(TODO) Updating match thread for match id {m.id}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission_id}')
-        new_post_body = f'UPDATED: {str(m)}'
+        espn_data = find_espn_data_for_match(mls_match, espn_scoreboard)
+        log.info(f'(TODO) Updating match thread for match id {mls_match.id}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission_id}')
+        new_post_body = f'UPDATED: {str(mls_match)}'
         submission = reddit_cli.submission(submission_id)
         submission = submission.edit(new_post_body)
 
@@ -77,7 +88,7 @@ def process_matches(matches, scoreboard, reddit_cli, subreddit):
     for match in matches:
         process_match(match, scoreboard, reddit_cli, subreddit)
 
-# TODO assert environment variables (e.g. for praw/reddit)
+
 def main(
         start=constants.DEFAULT_WINDOW_START,
         end=constants.DEFAULT_WINDOW_END,
@@ -101,10 +112,23 @@ def main(
         data_directory,
         force_fetch_mls)
 
+    #temporary_espn_testing(start, end)
+
     if not matches:
         log.info('no matches detected, returning')
 
-    scoreboard = espn.EspnLeagueScoreboard("usa.1", prefer_cached_espn) # mls
+    # TODO join scoreboard and mls matches
+    # espn event: .competitions[0].competitors[0].team.abbreviation
+    # mls match:
+    # TODO scope to dates via URL like this:
+    #    http://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard?dates=20240323-20240330
+    scoreboard = espn.EspnLeagueScoreboard(
+        "usa.1", # mls
+        start=start,
+        end=end,
+        prefer_cached=prefer_cached_espn,
+    )
+
     reddit_cli = reddit.get_reddit_client()
     subreddit = reddit_cli.subreddit(reddit.REDDIT_SUBREDDIT)
 
