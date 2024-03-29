@@ -14,6 +14,7 @@ class DdbGameThread(object):
     def __init__(self, mls_game_id):
         self.table_name = constants.AWS_DDB_TABLE_NAME
         self.reddit_thread_id_field = 'reddit_submission_id'
+        self.game_completed_field = 'game_completed'
         self.mls_game_id = mls_game_id
         self.key = {
             'id': {
@@ -99,6 +100,41 @@ class DdbGameThread(object):
 
     def get_reddit_thread_id(self):
         return self.item.get(self.reddit_thread_id_field, {}).get('S', None)
+
+    def set_game_completed(self):
+        submission_id = self.get_reddit_thread_id()
+        if not submission_id:
+            log.error(f'refusing to issue game completion put, no reddit thread')
+            return False
+        # TODO merge with other put_item logic
+        item = {
+            'id': {
+                'S': str(self.mls_game_id),
+            },
+            self.reddit_thread_id_field: {
+                'S': str(submission_id),
+            },
+            self.game_completed_field: {
+                'BOOL': True,
+            }
+        }
+        response = DDB.put_item(
+            TableName=self.table_name,
+            Item=item,
+        )
+        try:
+            if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+                self.item = item
+                log.debug(f'ddb: set {self.game_completed_field}=True '
+                          f'for match id {self.mls_game_id}')
+                return True
+        except:
+            log.error(f'ddb: failed to set {self.game_completed_field}=True '
+                      f'for match id {self.mls_game_id}')
+            return False
+
+    def is_game_completed(self):
+        return self.item.get(self.game_completed_field, {}).get('BOOL', False)
 
 
 if __name__ == '__main__':
