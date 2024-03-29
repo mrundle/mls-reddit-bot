@@ -17,19 +17,19 @@ def get_submission_title(mls_match, espn_event):
 def _get_bot_footer():
     tz = pytz.timezone('US/Central')
     ts = datetime.datetime.now().astimezone(tz).strftime("%Y-%m-%d %H:%M:%S %Z")
-    text = '___\n'
+    text = ''
     text += f'*u/MLS_Reddit_Bot is a bot running via AWS Lambda ([github](https://github.com/mrundle/mls-reddit-bot)), utilizing MLS and ESPN APIs. Issues or feature requests can be submitted [here](https://github.com/mrundle/mls-reddit-bot/issues/new/choose). This post was last updated at {ts}.*'
     return text
 
 def _get_espn_event_text(espn_event):
-    text = '___\n'
+    text = ''
     text += f'**Match events via [ESPN](https://www.espn.com/soccer/match?gameId={espn_event.id})**\n'
     for event in espn_event.get_key_events():
         text += f'* {event}\n'
     return text
 
 def _get_lineups(espn_event):
-    text = '___\n'
+    text = ''
     text += '**Lineups**\n\n'
     for roster in espn_event.rosters:
         team = roster['team']['displayName']
@@ -43,11 +43,28 @@ def _get_lineups(espn_event):
         text += '\n'
     return text
 
-def get_submission_body(mls_match, espn_event, submission_id=None):
-    body = f'{str(mls_match)}\n\n'
+def _get_match_summary(mls_match, espn_event, submission_id=None):
+    text = '**Overview**\n\n'
+    text += f'Matchup: {mls_match.away_team_fullname} ({espn_event.away_team_score()}) @ {mls_match.home_team_fullname} ({espn_event.home_team_score()})\n\n'
+    if espn_event.is_completed():
+        text += f'Status: Full time\n\n'
+    elif mls_match.minutes_til_start > 0:
+        text += f'Status: Starting soon\n\n'
+    else:
+        text += f'Status: In progress\n\n'
+    text += f'Venue: {mls_match.venue}, {mls_match.city}\n\n'
+    text += f'Start: {mls_match.start_timestamp()}\n\n'
     if submission_id:
-        body = f'♻️[ Auto-refreshing reddit comments link](http://www.reddit-stream.com/comments/{submission_id})\n\n'
-    body += _get_lineups(espn_event) + '\n\n'
+        text += f'\n♻️[ Auto-refreshing reddit comments link](http://www.reddit-stream.com/comments/{submission_id})\n\n'
+    return text
+
+def get_submission_body(mls_match, espn_event, submission_id=None):
+    body = ''
+    body += _get_match_summary(mls_match, espn_event, submission_id) + '\n\n'
+    body += '___\n'
     body += _get_espn_event_text(espn_event) + '\n\n'
+    body += '___\n'
+    body += _get_lineups(espn_event) + '\n\n'
+    body += '___\n'
     body += _get_bot_footer() + '\n\n'
     return body

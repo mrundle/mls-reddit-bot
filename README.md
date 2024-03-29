@@ -58,3 +58,9 @@ the same main loop that will run under Lambda. This requires both of the followi
 
 1. PRAW credentials either exported as environment variables or stored in `~/.config/praw.ini`
 2. AWS credentials either exported as environment variables or stored as default in `~/.aws/config` and `~/.aws/credentials`
+
+To run for a specific date and time:
+
+```
+$ mls-reddit-bot-cli --start 2024-03-22 --end 2024-03-24 --prefer-cached-espn
+```

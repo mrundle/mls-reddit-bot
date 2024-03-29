@@ -189,8 +189,6 @@ class EspnEvent(object):
 
         completed = self.header['status']['type']['completed']
 
-        #details = self.header['details']
-        teams = self.header['competitors']
         summary_text = ''
         t0 = self.header['competitors'][0]
         t0_abbrev = t0['team']['displayName']
@@ -201,6 +199,17 @@ class EspnEvent(object):
 
         prefix = 'Final' if completed else 'In Progress' # TODO time
         print(f'{prefix}: {t0_abbrev} ({t0_score}) vs. {t1_abbrev} ({t1_score})')
+
+
+    def home_team_score(self):
+        for team in self.header['competitors']:
+            if team['homeAway'].lower() == 'home':
+                return team['score']
+
+    def away_team_score(self):
+        for team in self.header['competitors']:
+            if team['homeAway'].lower() == 'away':
+                return team['score']
 
 
 class EspnLeagueScoreboard(object):
