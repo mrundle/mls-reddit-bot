@@ -2,6 +2,7 @@ import requests
 
 import datetime
 import dateutil
+import json
 import pytz
 
 from mls_reddit_bot import aws
@@ -10,18 +11,27 @@ from mls_reddit_bot import log
 
 
 def url_fetch_json(url):
-    log.info(f'fetching from {url}')
-    return requests.get(url).json()
+    for i in range(3):
+        log.info(f'fetching from {url}')
+        try:
+            return requests.get(url, timeout=10).json()
+        except requests.exceptions.Timeout:
+            log.warn(f'request timed out')
+    log.error(f'all requests timed out')
+    return {}
 
 
 class EspnEvent(object):
     def __init__(self, data, tz=constants.DEFAULT_TIMEZONE, prefer_cached=False):
         self.data = data
+        with open('/tmp/data.json', 'w') as f:
+            json.dump(data, f, indent=4) # XXX/DEBUG
         self.tz_str = tz
         self.prefer_cached = prefer_cached
         self.id = data['id']
         self.tz = tz
         self.uid = data['uid']
+        self.date_str = data['date']
         self.date = dateutil.parser.parse(data['date'])
         self.name = data['name'] # e.g. "D.C. United at St. Louis CITY SC"
         self.shortName = data['shortName'] # e.g. "DC @ STL"
@@ -43,23 +53,20 @@ class EspnEvent(object):
                 self.away_team_short = team['team']['shortDisplayName']
                 self.away_team_fullname = team['team']['name']
 
-        #self.venue = self.summary['gameInfo']['venue']['fullName']
-        #self.city = self.summary['gameInfo']['venue']['address']['city']
-        #self.country = self.summary['gameInfo']['venue']['address']['country']
-
         # fetch summary
         self.summary = self.fetch()
-        self.header = self.get_header() # grab summary.competitions.header[0]
-        self.rosters = self.summary.get('rosters', [])
-
-        # XXX tmp/dump
-        import json
-        with open('/tmp/data.json', 'w') as f:
-            json.dump(data, f, indent=4)
-        with open('/tmp/header.json', 'w') as f:
-            json.dump(self.header, f, indent=4)
         with open('/tmp/summary.json', 'w') as f:
-            json.dump(self.summary, f, indent=4)
+            json.dump(self.summary, f, indent=4) # XXX/DEBUG
+
+        if self.summary:
+            self.header = self.get_header() # grab summary.competitions.header[0]
+            self.rosters = self.summary.get('rosters', [])
+        else:
+            self.header = {}
+            self.rosters = {}
+
+        with open('/tmp/header.json', 'w') as f:
+            json.dump(self.header, f, indent=4) # XXX/DEBUG
 
 
     def fetch(self):

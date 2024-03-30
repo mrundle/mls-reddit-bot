@@ -55,41 +55,45 @@ def _get_lineups(event):
 
 def _get_match_summary(event, submission_id=None):
     text = '**Overview**\n\n'
-    #text += f'|Matchup|{event.away_team_fullname} ({event.away_team_score()}) @ {event.home_team_fullname} ({event.home_team_score()})|\n'
-    text += f'|||\n'
-    text += '|---|:---:|\n'
-    text += f'|{event.away_team_fullname}|{event.away_team_score()}|\n'
-    text += f'|{event.home_team_fullname}|{event.home_team_score()}|\n'
+    text += f'|||⚽|\n'
+    text += '|---|:---:|:-:|\n'
+    text += f'|Home|{event.home_team_fullname}|**{event.home_team_score()}**|\n'
+    text += f'|Away|{event.away_team_fullname}|**{event.away_team_score()}**|\n'
     if event and event.completed:
-        text += f'|Status|Full time ({event.display_clock})|\n'
+        text += f'|Status|Full time ({event.display_clock})||\n'
     elif event.minutes_til_start > 0:
-        text += f'|Status|Starting soon|\n'
+        text += f'|Status|Starting soon||\n'
     else:
-        text += f'|Status|In progress - {event.display_clock}|\n'
-    text += f'|Venue|{event.venue}, {event.city}|\n'
-    text += f'|Start|{event.start_timestamp()}|\n\n'
+        text += f'|Status|In progress - {event.display_clock}||\n'
+    text += f'|Venue|{event.venue}, {event.city}||\n'
+    text += f'|Start|{event.start_timestamp()}||\n\n'
     if submission_id:
         text += f'\n♻️[ Auto-refreshing reddit comments link](http://www.reddit-stream.com/comments/{submission_id})\n\n'
-    #text += f'Matchup: {event.away_team_fullname} ({event.away_team_score()}) @ {event.home_team_fullname} ({event.home_team_score()})\n\n'
-    #if event and event.completed:
-    #    text += f'Status: Full time\n\n'
-    #elif event.minutes_til_start > 0:
-    #    text += f'Status: Starting soon\n\n'
-    #else:
-    #    text += f'Status: In progress\n\n'
-    #text += f'Venue: {event.venue}, {event.city}\n\n'
-    #text += f'Start: {event.start_timestamp()}\n\n'
-    #if submission_id:
-    #    text += f'\n♻️[ Auto-refreshing reddit comments link](http://www.reddit-stream.com/comments/{submission_id})\n\n'
+    return text
+
+def _get_pre_match_summary(event, submission_id=None):
+    text = '**Overview**\n\n'
+    text += '*Match details not yet available via ESPN.*\n\n'
+    text += f'|||⚽|\n'
+    text += '|---|:---:|:-:|\n'
+    text += f'|Home|{event.home_team_fullname}|-|\n'
+    text += f'|Away|{event.away_team_fullname}|-|\n'
+    text += f'|Venue|{event.venue}, {event.city}||\n'
+    text += f'|Start|{event.start_timestamp()}||\n\n'
+    if submission_id:
+        text += f'\n♻️[ Auto-refreshing reddit comments link](http://www.reddit-stream.com/comments/{submission_id})\n\n'
     return text
 
 def get_submission_body(event, submission_id=None):
     body = ''
-    body += _get_match_summary(event, submission_id) + '\n\n'
-    body += '___\n'
-    body += _get_lineups(event) + '\n\n'
-    body += '___\n'
-    body += _get_key_event_text(event) + '\n\n'
+    if not event.summary:
+        body += _get_pre_match_summary(event, submission_id)
+    else:
+        body += _get_match_summary(event, submission_id) + '\n\n'
+        body += '___\n'
+        body += _get_lineups(event) + '\n\n'
+        body += '___\n'
+        body += _get_key_event_text(event) + '\n\n'
     body += '___\n'
     body += _get_bot_footer() + '\n\n'
     return body

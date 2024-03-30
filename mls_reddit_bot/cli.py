@@ -30,15 +30,9 @@ def parse_args():
                         default=constants.DEFAULT_TIMEZONE,
                         type=str,
                         help="output timezone")
-    parser.add_argument("--categories",
-                        default=constants.DEFAULT_MLS_CATEGORIES,
-                        help="competition category")
     parser.add_argument("--show-timezones",
                         action='store_true',
                         help="list all valid timezone strings and exit")
-    parser.add_argument("--show-categories",
-                        action='store_true',
-                        help="list all valid categories and exit")
     parser.add_argument("--force-fetch-mls",
                         action='store_true',
                         default=False,
@@ -47,6 +41,10 @@ def parse_args():
                         action='store_true',
                         default=False,
                         help="try to use cached ESPN data (generally only for testing)")
+    parser.add_argument("--minutes-early",
+                        default=constants.DEFAULT_MINUTES_TO_START,
+                        type=int,
+                        help="post the match thread N minutes before match start")
     #parser.add_argument("-d", "--debug",
     #                    action='store_true',
     #                    help="show debug log messages")
@@ -58,11 +56,6 @@ def parse_args():
         print('TIMEZONES:')
         for tz in pytz.all_timezones_set:
             print(f'\t* {tz}')
-        sys.exit(1)
-    elif args.show_categories:
-        print('CATEGORIES:')
-        for cat in SUPPORTED_MLS_CATEGORIES:
-            print(f'\t* {cat}')
         sys.exit(1)
 
     try:
@@ -79,7 +72,7 @@ def cli_main():
         start=args.start,
         end=args.end,
         tz=args.tz,
-        categories=args.categories,
+        minutes_early=args.minutes_early,
         force_fetch_mls=args.force_fetch_mls,
         prefer_cached_espn=args.prefer_cached_espn,
     )

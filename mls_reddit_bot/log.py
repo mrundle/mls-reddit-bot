@@ -1,6 +1,7 @@
 # TODO use logging, log formatting (file/func/line for error, etc.)
 
 import sys
+import logging
 
 DEBUG_LOGGING = True
 
@@ -9,6 +10,9 @@ def _log(lvl, msg):
 
 def error(msg):
     _log('ERROR', msg)
+
+def exception(msg, exception):
+    logging.error(f'{msg}: {exception}', exc_info=True)
 
 def warn(msg):
     _log('WARNING', msg)

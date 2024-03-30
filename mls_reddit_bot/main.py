@@ -1,10 +1,9 @@
-#!/usr/bin/env python3
-
 import warnings
 warnings.filterwarnings('ignore')
 
 import json
 import praw
+import traceback
 
 # this package
 from mls_reddit_bot import (
@@ -17,12 +16,12 @@ from mls_reddit_bot import (
 )
 
 
-def process_match(event, reddit_cli, subreddit):
-    if event.minutes_til_start() > constants.DEFAULT_MINUTES_TO_START:
+def process_match(event, reddit_cli, subreddit, minutes_early):
+    if event.minutes_til_start() > minutes_early:
         print(f'not processing {event}, minutes_til_start={event.minutes_til_start()}')
         return
 
-    ddb_entry = aws.ddb.DdbGameThread(event.id)
+    ddb_entry = aws.ddb.DdbGameThread(event)
     if ddb_entry.error:
         log.error('failed to fetch game thread id from dynamodb')
         return
@@ -66,6 +65,7 @@ def main(
             start=constants.DEFAULT_WINDOW_START,
             end=constants.DEFAULT_WINDOW_END,
             tz=constants.DEFAULT_TIMEZONE,
+            minutes_early=constants.DEFAULT_MINUTES_TO_START,
             categories=constants.DEFAULT_MLS_CATEGORIES,
             force_fetch_mls=False,
             prefer_cached_espn=False
@@ -84,6 +84,7 @@ def main(
 
     for event in scoreboard.events:
         try:
-            process_match(event, reddit_cli, subreddit)
+            process_match(event, reddit_cli, subreddit, minutes_early)
         except Exception as e:
-            log.error(f'caught error while handling {event}, {e}')
+            log.exception(f'caught error while handling {event}', e)
+            exit(1)

@@ -8,8 +8,14 @@ import requests
 
 
 def url_fetch_json(url):
-    log.info(f'fetching from {url}')
-    return requests.get(url).json()
+    for i in range(3):
+        log.info(f'fetching from {url}')
+        try:
+            return requests.get(url, timeout=10).json()
+        except requests.exceptions.Timeout:
+            log.warn(f'request timed out')
+    log.error(f'all requests timed out')
+    return {}
 
 
 class EspnLeagueScoreboard(object):

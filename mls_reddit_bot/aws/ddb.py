@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import boto3
 import json
 
@@ -8,15 +7,17 @@ from mls_reddit_bot import log
 DDB = boto3.client('dynamodb')
 
 class DdbGameThread(object):
-    def __init__(self, game_id):
+    def __init__(self, event):
         self.table_name = constants.AWS_DDB_TABLE_NAME
+        self.match_date_id_field = 'match_date'
         self.reddit_thread_id_field = 'reddit_submission_id'
         self.game_completed_field = 'game_completed'
-        self.game_id = game_id
+        self.event = event
+        self.event_id = event.id
         self.key = {
             'id': {
-                'S': str(self.game_id),
-            }
+                'S': str(self.event_id),
+            },
         }
         self.item, self.error = self.fetch()
 
@@ -47,9 +48,17 @@ class DdbGameThread(object):
         if self.error:
             log.error('ddb: refusing to recreate after fetch error')
             return False
+        item = {
+            'id': {
+                'S': str(self.event_id),
+            },
+            self.match_date_id_field: {
+                'S': self.event.date_str,
+            },
+        }
         response = DDB.put_item(
             TableName=self.table_name,
-            Item=self.key,
+            Item=item,
         )
         md = {}
         code = -1
@@ -59,7 +68,7 @@ class DdbGameThread(object):
             success = str(code) == "200"
         except Exception as e:
             log.error(f'ddb: failure (code={code}) putting to table '
-                      f'{self.table_name}, key={self.key}')
+                      f'{self.table_name}, key={self.key})')
             success = False
 
         if success:
@@ -73,10 +82,13 @@ class DdbGameThread(object):
 
         item = {
             'id': {
-                'S': str(self.game_id),
+                'S': str(self.event_id),
             },
             self.reddit_thread_id_field: {
                 'S': str(submission_id),
+            },
+            self.match_date_id_field: {
+                'S': self.event.date_str,
             },
         }
         response = DDB.put_item(
@@ -89,7 +101,7 @@ class DdbGameThread(object):
                 return True
         except:
             log.error(f'ddb: failed to set reddit submission id to '
-                      f'{submission_id} for match id {self.game_id}')
+                      f'{submission_id} for match id {self.event_id}')
             return False
 
     def get_reddit_thread_id(self):
@@ -103,7 +115,7 @@ class DdbGameThread(object):
         # TODO merge with other put_item logic
         item = {
             'id': {
-                'S': str(self.game_id),
+                'S': str(self.event_id),
             },
             self.reddit_thread_id_field: {
                 'S': str(submission_id),
@@ -122,7 +134,7 @@ class DdbGameThread(object):
                 return True
         except:
             log.error(f'ddb: failed to set {self.game_completed_field}=True '
-                      f'for match id {self.game_id}')
+                      f'for match id {self.event_id}')
             return False
 
     def is_game_completed(self):
