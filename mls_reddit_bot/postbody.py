@@ -53,12 +53,7 @@ def _get_match_summary(event, submission_id=None):
     text += '|---|:---:|:-:|\n'
     text += f'|**Home**|**{event.home_team_fullname}**|**{event.home_team_score()}**|\n'
     text += f'|**Away**|**{event.away_team_fullname}**|**{event.away_team_score()}**|\n'
-    if event and event.completed:
-        text += f'|Status|Full time ({event.display_clock})||\n'
-    elif event.minutes_til_start() > 0:
-        text += f'|Status|Starting soon||\n'
-    else:
-        text += f'|Status|In progress - {event.display_clock}||\n'
+    text += f'|Status|{event.display_status}||\n'
     text += f'|Venue|{event.venue}||\n'
     text += f'|City|{event.city}||\n'
     text += f'|Date|{event.start_day()}||\n'

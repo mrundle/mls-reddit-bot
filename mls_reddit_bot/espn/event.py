@@ -41,6 +41,10 @@ class EspnEvent(object):
         self.city = data['competitions'][0]['venue']['address']['city']
         self.country = data['competitions'][0]['venue']['address']['country']
         self.display_clock = data['competitions'][0]['status']['displayClock']
+        self.state = data['competitions'][0]['status']['type']['state'] # pre, post, or in
+        self.display_status = data['competitions'][0]['status']['type']['description'] # Halftime, Full Time
+        if self.state == 'in':
+            self.display_status += f' ({self.display_clock})'
         self.links = data['links']
         self.learned_tz = timezone.get_timezone(self.city)
         if not self.learned_tz:
