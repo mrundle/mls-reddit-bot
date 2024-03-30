@@ -43,17 +43,3 @@ def get_timezone(city):
         return pytz.timezone(cities_timezones[fuzzy_match[0]])
     else:
         return None
-
-# Example usage
-for city in [
-    "Atlanta", "Austin", "Charlotte", "Chicago", "Cincinnati", "Columbus", "Dallas", "Denver",
-    "Houston", "Kansas City", "Los Angeles", "Miami", "Montreal", "Nashville", "New York City",
-    "Orlando", "Philadelphia", "Portland", "Salt Lake City", "San Jose", "Seattle", "St. Louis",
-    "Toronto", "Vancouver",
-]:
-    timezone = get_timezone(city)
-    if timezone:
-        print(f"Timezone for {city}: {timezone.zone}")
-    else:
-        print(f"No city found: {city}")
-
