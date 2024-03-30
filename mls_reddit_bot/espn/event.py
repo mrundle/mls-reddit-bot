@@ -31,6 +31,7 @@ class EspnEvent(object):
         self.venue = data['competitions'][0]['venue']['fullName']
         self.city = data['competitions'][0]['venue']['address']['city']
         self.country = data['competitions'][0]['venue']['address']['country']
+        self.display_clock = data['competitions'][0]['status']['displayClock']
         self.links = data['links']
         for team in self.data['competitions'][0]['competitors']:
             if team['homeAway'].lower() == 'home':
