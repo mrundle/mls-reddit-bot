@@ -111,6 +111,24 @@ class EspnEvent(object):
         dt = self.date.astimezone(tz=tz)
         return dt.strftime(f'%A %B %d %Y, %I:%M %p {dt.tzname()}')
 
+    def start_day(self):
+        """
+        Returns string like:
+            Saturday March 23, 2024
+        """
+        tz = self.learned_tz if self.learned_tz else pytz.timezone(self.tz_str)
+        dt = self.date.astimezone(tz=tz)
+        return dt.strftime(f'%A %B %d, %Y')
+
+    def start_time(self):
+        """
+        Returns string like:
+            07:30 PM CDT
+        """
+        tz = self.learned_tz if self.learned_tz else pytz.timezone(self.tz_str)
+        dt = self.date.astimezone(tz=tz)
+        return dt.strftime(f'%I:%M %p {dt.tzname()}')
+
     def minutes_til_start(self):
         now = datetime.datetime.now(datetime.timezone.utc)
         delta = self.date - now
@@ -128,7 +146,7 @@ class EspnEvent(object):
 
     def get_key_events(self):
         event_strings = []
-        for event in self.summary['keyEvents']:
+        for event in self.summary.get('keyEvents', []):
             time = event['clock']['displayValue']
             try:
                 text = event['text']

@@ -59,8 +59,10 @@ def _get_match_summary(event, submission_id=None):
         text += f'|Status|Starting soon||\n'
     else:
         text += f'|Status|In progress - {event.display_clock}||\n'
-    text += f'|Venue|{event.venue}, {event.city}||\n'
-    text += f'|Start|{event.start_timestamp()}||\n\n'
+    text += f'|Venue|{event.venue}||\n'
+    text += f'|City|{event.city}||\n'
+    text += f'|Date|{event.start_day()}||\n'
+    text += f'|Time|{event.start_time()}||\n\n'
     if submission_id:
         text += f'\n♻️[ Auto-refreshing reddit comments link](http://www.reddit-stream.com/comments/{submission_id})\n\n'
     return text
