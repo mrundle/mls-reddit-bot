@@ -100,29 +100,20 @@ def process_matches(matches, scoreboard, reddit_cli, subreddit):
 
 
 def main(
-        start=constants.DEFAULT_WINDOW_START,
-        end=constants.DEFAULT_WINDOW_END,
-        tz=None,
-        categories=None,
-        data_directory=None,
-        force_fetch_mls=None,
-        prefer_cached_espn=None):
-    if not tz:
-        tz = constants.DEFAULT_TIMEZONE
-    if not categories:
-        categories = constants.DEFAULT_MLS_CATEGORIES
-    if not data_directory:
-        data_directory = constants.DEFAULT_DATA_DIR
+            start=constants.DEFAULT_WINDOW_START,
+            end=constants.DEFAULT_WINDOW_END,
+            tz=constants.DEFAULT_TIMEZONE,
+            categories=constants.DEFAULT_MLS_CATEGORIES,
+            force_fetch_mls=False,
+            prefer_cached_espn=False
+        ):
 
     matches = mls.fetch_matches(
         start,
         end,
         tz,
         categories,
-        data_directory,
         force_fetch_mls)
-
-    #temporary_espn_testing(start, end)
 
     if not matches:
         log.info('no matches detected, returning')

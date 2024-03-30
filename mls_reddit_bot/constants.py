@@ -13,10 +13,6 @@ DEFAULT_TIMEZONE = 'US/Eastern'
 # create threads this many minutes before the match is scheduled to start
 DEFAULT_MINUTES_TO_START = 15
 
-# TODO remove local data dir, use s3/ddb for all persistence
-DEFAULT_DATA_DIR = '/tmp'
-os.makedirs(DEFAULT_DATA_DIR, exist_ok=True) # TODO remove, not used
-
 # by default, look for matches occurring +/- a certain window relative to today
 TODAY = datetime.date.today()
 DEFAULT_WINDOW_START = TODAY - datetime.timedelta(days=2)

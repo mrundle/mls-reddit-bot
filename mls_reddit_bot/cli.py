@@ -30,9 +30,6 @@ def parse_args():
                         default=constants.DEFAULT_TIMEZONE,
                         type=str,
                         help="output timezone")
-    parser.add_argument("--data-directory",
-                        default=constants.DEFAULT_DATA_DIR,
-                        help="data directory")
     parser.add_argument("--categories",
                         default=constants.DEFAULT_MLS_CATEGORIES,
                         help="competition category")
@@ -74,8 +71,6 @@ def parse_args():
         sys.stderr.write(f"unknown timezone '{args.tz}', try {sys.argv[0]} --show-timezones\n")
         sys.exit(1)
 
-    os.makedirs(args.data_directory, exist_ok=True)
-
     return args
 
 def cli_main():
@@ -85,7 +80,6 @@ def cli_main():
         end=args.end,
         tz=args.tz,
         categories=args.categories,
-        data_directory=args.data_directory,
         force_fetch_mls=args.force_fetch_mls,
         prefer_cached_espn=args.prefer_cached_espn,
     )

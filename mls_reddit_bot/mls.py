@@ -65,18 +65,14 @@ class MlsMatchSummary(object):
 
 
 # TODO use this, more granular stats
-def fetch_match_details(id, outdir):
-    outfile = os.path.join(outdir, f'match-{id}')
+def fetch_match_details(id):
     url=f'https://stats-api.mlssoccer.com/v1/matches?&match_game_id={id}&include=away_club_match&include=home_club_match&include=venue&include=home_club&include=away_club'
     log.debug(f'fetching from {url}')
     response = requests.get(url)
     data = response.json()
-    with open(outfile, 'w') as f:
-        json.dump(data, f, indent=4)
-        log.debug(f'wrote details for match id {id} to {outfile}')
 
 
-def fetch_matches(start_dt, end_dt, tz, categories, outdir, force):
+def fetch_matches(start_dt, end_dt, tz, categories, force):
     start_str = start_dt.strftime("%Y-%m-%d")
     end_str = end_dt.strftime("%Y-%m-%d")
 
