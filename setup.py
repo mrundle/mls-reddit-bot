@@ -26,6 +26,8 @@ setup(
         'praw',
         'dateutils',
         'pytz',
+        'fuzzywuzzy', # timezone fuzzy matching for city names
+        'python-Levenshtein', # squelsh warnings for fuzzywuzzy
     ],
     # for creating lambda layer zip; https://pypi.org/project/lambda-setuptools/#description
     setup_requires=['lambda_setuptools'],

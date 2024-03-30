@@ -8,6 +8,7 @@ import pytz
 from mls_reddit_bot import aws
 from mls_reddit_bot import constants
 from mls_reddit_bot import log
+from mls_reddit_bot import timezone
 
 
 def url_fetch_json(url):
@@ -43,6 +44,10 @@ class EspnEvent(object):
         self.country = data['competitions'][0]['venue']['address']['country']
         self.display_clock = data['competitions'][0]['status']['displayClock']
         self.links = data['links']
+        self.learned_tz = timezone.get_timezone(self.city)
+        if not self.learned_tz:
+            log.warn(f'could not learn timezone for {self.city}')
+
         for team in self.data['competitions'][0]['competitors']:
             if team['homeAway'].lower() == 'home':
                 self.home_team_abbrev = team['team']['abbreviation']
@@ -92,14 +97,14 @@ class EspnEvent(object):
         Return string like:
             DC @ STL
         """
-        return f'{self.shortName} {self.date_str} (id={self.id})'
+        return f'{self.shortName} {self.date_str} in {self.city} at {self.start_timestamp()} (id={self.id})'
 
     def start_timestamp(self):
         """
         Returns string like:
             Saturday March 23 2024, 07:30 PM CDT
         """
-        tz = pytz.timezone(self.tz_str)
+        tz = self.learned_tz if self.learned_tz else pytz.timezone(self.tz_str)
         dt = self.date.astimezone(tz=tz)
         return dt.strftime(f'%A %B %d %Y, %I:%M %p {dt.tzname()}')
 
