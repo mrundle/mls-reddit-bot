@@ -92,7 +92,7 @@ class EspnEvent(object):
         Return string like:
             DC @ STL
         """
-        return f'{self.shortName} (id={self.id})'
+        return f'{self.shortName} {self.date_str} (id={self.id})'
 
     def start_timestamp(self):
         """

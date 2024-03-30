@@ -55,6 +55,9 @@ class DdbGameThread(object):
             self.match_date_id_field: {
                 'S': self.event.date_str,
             },
+            self.game_completed_field: {
+                'BOOL': False,
+            },
         }
         response = DDB.put_item(
             TableName=self.table_name,
@@ -90,6 +93,9 @@ class DdbGameThread(object):
             self.match_date_id_field: {
                 'S': self.event.date_str,
             },
+            self.game_completed_field: {
+                'BOOL': False,
+            }
         }
         response = DDB.put_item(
             TableName=self.table_name,
@@ -120,9 +126,12 @@ class DdbGameThread(object):
             self.reddit_thread_id_field: {
                 'S': str(submission_id),
             },
+            self.match_date_id_field: {
+                'S': self.event.date_str,
+            },
             self.game_completed_field: {
-                'BOOL': True,
-            }
+                'BOOL': self.event.completed,
+            },
         }
         response = DDB.put_item(
             TableName=self.table_name,

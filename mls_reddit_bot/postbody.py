@@ -57,8 +57,8 @@ def _get_match_summary(event, submission_id=None):
     text = '**Overview**\n\n'
     text += f'|||⚽|\n'
     text += '|---|:---:|:-:|\n'
-    text += f'|Home|{event.home_team_fullname}|**{event.home_team_score()}**|\n'
-    text += f'|Away|{event.away_team_fullname}|**{event.away_team_score()}**|\n'
+    text += f'|**Home**|**{event.home_team_fullname}**|**{event.home_team_score()}**|\n'
+    text += f'|**Away**|**{event.away_team_fullname}**|**{event.away_team_score()}**|\n'
     if event and event.completed:
         text += f'|Status|Full time ({event.display_clock})||\n'
     elif event.minutes_til_start > 0:
@@ -76,8 +76,8 @@ def _get_pre_match_summary(event, submission_id=None):
     text += '*Match details not yet available via ESPN.*\n\n'
     text += f'|||⚽|\n'
     text += '|---|:---:|:-:|\n'
-    text += f'|Home|{event.home_team_fullname}|-|\n'
-    text += f'|Away|{event.away_team_fullname}|-|\n'
+    text += f'|**Home**|**{event.home_team_fullname}**|**-**|\n'
+    text += f'|**Away**|**{event.away_team_fullname}**|**-**|\n'
     text += f'|Venue|{event.venue}, {event.city}||\n'
     text += f'|Start|{event.start_timestamp()}||\n\n'
     if submission_id:
