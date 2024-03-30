@@ -6,13 +6,7 @@ import pytz
 import datetime
 
 def get_submission_title(event):
-    if event.minutes_til_start() > 0:
-        postfix = 'Starting Soon'
-    elif event.completed:
-        postfix = 'Final'
-    else:
-        postfix = 'In Progress'
-    return f'Match Thread: {event.away_team_fullname} @ {event.home_team_fullname} ({postfix})'
+    return f'Match Thread: {event.away_team_fullname} @ {event.home_team_fullname}'
 
 def _get_bot_footer():
     tz = pytz.timezone('US/Central')
