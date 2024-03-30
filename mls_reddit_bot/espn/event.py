@@ -25,8 +25,6 @@ def url_fetch_json(url):
 class EspnEvent(object):
     def __init__(self, data, tz=constants.DEFAULT_TIMEZONE, prefer_cached=False):
         self.data = data
-        with open('/tmp/data.json', 'w') as f:
-            json.dump(data, f, indent=4) # XXX/DEBUG
         self.tz_str = tz
         self.prefer_cached = prefer_cached
         self.id = data['id']
@@ -60,8 +58,6 @@ class EspnEvent(object):
 
         # fetch summary
         self.summary = self.fetch()
-        with open('/tmp/summary.json', 'w') as f:
-            json.dump(self.summary, f, indent=4) # XXX/DEBUG
 
         if self.summary:
             self.header = self.get_header() # grab summary.competitions.header[0]
@@ -69,9 +65,6 @@ class EspnEvent(object):
         else:
             self.header = {}
             self.rosters = {}
-
-        with open('/tmp/header.json', 'w') as f:
-            json.dump(self.header, f, indent=4) # XXX/DEBUG
 
 
     def fetch(self):
