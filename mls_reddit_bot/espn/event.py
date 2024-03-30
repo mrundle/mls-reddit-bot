@@ -66,6 +66,15 @@ class EspnEvent(object):
             self.header = {}
             self.rosters = {}
 
+        #with open('/tmp/data.json', 'w') as f:
+        #    json.dump(self.data, f, indent=4)
+        #with open('/tmp/summary.json', 'w') as f:
+        #    json.dump(self.summary, f, indent=4)
+        #with open('/tmp/header.json', 'w') as f:
+        #    json.dump(self.header, f, indent=4)
+        #with open('/tmp/rosters.json', 'w') as f:
+        #    json.dump(self.rosters, f, indent=4)
+
 
     def fetch(self):
         # fetches match summary, which has the following top-level keys
@@ -75,6 +84,7 @@ class EspnEvent(object):
         #    pickcenter, rosters,   standings, videos
         data = {}
         # TODO not hardcode usa.1 (if ever supporting non-mls)
+        #self.url = f'https://site.web.api.espn.com/apis/site/v2/sports/soccer/all/summary?region=us&lang=en&contentorigin=espn&event={self.id}'
         self.url = f'http://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/summary?event={self.id}'
         s3_bucket = constants.AWS_S3_BUCKET_NAME
         s3_subdir = constants.AWS_S3_ESPN_SCOREBOARD_SUBDIR
@@ -82,7 +92,7 @@ class EspnEvent(object):
         if self.prefer_cached:
             return aws.s3.read_or_fetch_json(self.url, s3_bucket, f'{s3_subdir}/{s3_file}')
         else:
-            data = url_fetch_json(self.url)
+            return url_fetch_json(self.url)
 
 
     def __repr__(self):
