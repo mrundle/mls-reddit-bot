@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 
 from mls_reddit_bot import log
 
-S3 = None
+S3 = boto3.client('s3')
 
 def write_json(bucket, key, data):
     log.info(f'caching data to s3://{bucket}/{key}')
@@ -15,10 +15,6 @@ def write_json(bucket, key, data):
 
 # if we haven't already cached, fetch json from a url
 def read_or_fetch_json(url, bucket, key, force=False):
-    global S3
-    if not S3:
-        S3 = boto3.client('s3')
-
     data = {}
     try:
         result = S3.get_object(Bucket=bucket, Key=key)

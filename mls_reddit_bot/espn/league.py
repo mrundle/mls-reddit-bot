@@ -13,7 +13,7 @@ def url_fetch_json(url):
 
 
 class EspnLeagueScoreboard(object):
-    def __init__(self, league_code, start=None, end=None, prefer_cached=False):
+    def __init__(self, league_code, start=None, end=None, tz=constants.DEFAULT_TIMEZONE, prefer_cached=False):
         assert league_code in constants.ESPN_SOCCER_LEAGUE_CODES.keys()
         self.league_code = league_code
         self.url = f'http://site.api.espn.com/apis/site/v2/sports/soccer/{self.league_code}/scoreboard'
@@ -33,10 +33,9 @@ class EspnLeagueScoreboard(object):
             self.data = aws.s3.read_or_fetch_json(self.url, s3_bucket, s3_key)
         else:
             self.data = url_fetch_json(self.url)
-            aws.s3.write_json(s3_bucket, s3_key, self.data)
         self.leagues = self.data['leagues'] # not much here, mainly logos
         self.season = self.leagues[0]['season']
         #self.day = dateutil.parser.parse(self.data['day']['date']) # e.g. 2024-03-23
         self.events = [
-            EspnEvent(e, self.prefer_cached) for e in self.data['events']
+            EspnEvent(e, tz=tz, prefer_cached=self.prefer_cached) for e in self.data['events']
         ]

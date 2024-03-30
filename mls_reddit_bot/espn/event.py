@@ -1,7 +1,8 @@
 import requests
 
-# pip
+import datetime
 import dateutil
+import pytz
 
 from mls_reddit_bot import aws
 from mls_reddit_bot import constants
@@ -14,31 +15,51 @@ def url_fetch_json(url):
 
 
 class EspnEvent(object):
-    def __init__(self, data, prefer_cached=False):
+    def __init__(self, data, tz=constants.DEFAULT_TIMEZONE, prefer_cached=False):
         self.data = data
-        self.id = data['id']
-        self.uid = data['uid']
-        self.date = data['date']
-        self.name = data['name']
-        self.shortName = data['shortName']
-        self.season = data['season']
-        self.competitions = data['competitions']
-        self.status = data['status']
-        self.venue = data['venue']
-        self.links = data['links']
+        self.tz_str = tz
         self.prefer_cached = prefer_cached
-        for team in self.competitions[0]['competitors']:
+        self.id = data['id']
+        self.tz = tz
+        self.uid = data['uid']
+        self.date = dateutil.parser.parse(data['date'])
+        self.name = data['name'] # e.g. "D.C. United at St. Louis CITY SC"
+        self.shortName = data['shortName'] # e.g. "DC @ STL"
+        self.season = data['season']
+        self.status = data['status']
+        self.completed = data['status']['type']['completed']
+        self.venue = data['competitions'][0]['venue']['fullName']
+        self.city = data['competitions'][0]['venue']['address']['city']
+        self.country = data['competitions'][0]['venue']['address']['country']
+        self.links = data['links']
+        for team in self.data['competitions'][0]['competitors']:
             if team['homeAway'].lower() == 'home':
                 self.home_team_abbrev = team['team']['abbreviation']
                 self.home_team_short = team['team']['shortDisplayName']
+                self.home_team_fullname = team['team']['name']
             else:
                 self.away_team_abbrev = team['team']['abbreviation']
                 self.away_team_short = team['team']['shortDisplayName']
+                self.away_team_fullname = team['team']['name']
+
+        #self.venue = self.summary['gameInfo']['venue']['fullName']
+        #self.city = self.summary['gameInfo']['venue']['address']['city']
+        #self.country = self.summary['gameInfo']['venue']['address']['country']
 
         # fetch summary
         self.summary = self.fetch()
-        self.header = self.get_header()
+        self.header = self.get_header() # grab summary.competitions.header[0]
         self.rosters = self.summary.get('rosters', [])
+
+        # XXX tmp/dump
+        import json
+        with open('/tmp/data.json', 'w') as f:
+            json.dump(data, f, indent=4)
+        with open('/tmp/header.json', 'w') as f:
+            json.dump(self.header, f, indent=4)
+        with open('/tmp/summary.json', 'w') as f:
+            json.dump(self.summary, f, indent=4)
+
 
     def fetch(self):
         # fetches match summary, which has the following top-level keys
@@ -55,10 +76,31 @@ class EspnEvent(object):
         if self.prefer_cached:
             return aws.s3.read_or_fetch_json(self.url, s3_bucket, f'{s3_subdir}/{s3_file}')
         else:
-            return url_fetch_json(self.url)
+            data = url_fetch_json(self.url)
 
-    def is_completed(self):
-        return self.status['type']['completed']
+
+    def __repr__(self):
+        """
+        Return string like:
+            DC @ STL
+        """
+        return f'{self.shortName} (id={self.id})'
+
+    def start_timestamp(self):
+        """
+        Returns string like:
+            Saturday March 23 2024, 07:30 PM CDT
+        """
+        tz = pytz.timezone(self.tz_str)
+        dt = self.date.astimezone(tz=tz)
+        return dt.strftime(f'%A %B %d %Y, %I:%M %p {dt.tzname()}')
+
+    def minutes_til_start(self):
+        now = datetime.datetime.now(datetime.timezone.utc)
+        delta = self.date - now
+        seconds_til_start = delta.total_seconds()
+        minutes_til_start = int(seconds_til_start / 60)
+        return minutes_til_start
 
     def print_verbose_commentary(self):
         commentary = self.summary['commentary']
@@ -147,9 +189,9 @@ class EspnEvent(object):
     def home_team_score(self):
         for team in self.header['competitors']:
             if team['homeAway'].lower() == 'home':
-                return team['score']
+                return team.get('score', 0)
 
     def away_team_score(self):
         for team in self.header['competitors']:
             if team['homeAway'].lower() == 'away':
-                return team['score']
+                return team.get('score', 0)
