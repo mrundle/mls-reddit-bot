@@ -15,7 +15,7 @@ AWS_S3_ESPN_SCOREBOARD_SUBDIR = 'espn-scoreboard' # caching disabled outside of 
 DEFAULT_TIMEZONE = 'US/Eastern'
 
 # create threads this many minutes before the match is scheduled to start
-DEFAULT_MINUTES_TO_START = 15
+DEFAULT_MINUTES_TO_START = 5
 
 # by default, look for matches occurring +/- a certain window relative to today
 TODAY = datetime.date.today()
