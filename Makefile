@@ -1,4 +1,6 @@
-all: test ldist
+all: clean build test install ldist
+
+local: clean build test install
 
 build:
 	python3 setup.py build

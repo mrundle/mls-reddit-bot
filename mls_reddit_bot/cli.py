@@ -5,7 +5,7 @@ import os
 import pytz
 
 from mls_reddit_bot.main import main
-from mls_reddit_bot.main import constants
+from mls_reddit_bot import constants
 
 def get_cli_description():
     return """\

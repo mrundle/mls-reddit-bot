@@ -1,38 +1,12 @@
-# fetch all games
-#    https://site.web.api.espn.com/apis/v2/scoreboard/header?region=us&lang=en&contentorigin=espn&buyWindow=1m&showAirings=buy,live,replay&showZipLookup=true&tz=America/New_York&_ceID=15878776
-
-# another one:
-#    https://site.web.api.espn.com/apis/site/v2/sports/soccer/scorepanel?league=all&region=us&lang=en&contentorigin=espn&limit=250&dates=20240323&showAirings=live
-
-# fetch mls (usa.1) teams
-#     https://site.web.api.espn.com/apis/site/v2/sports/soccer/USA.1/teams?region=us&lang=en&contentorigin=espn&limit=400&includeModules=news
-
-import json
-import os
 import requests
 
 # pip
 import dateutil
 
+from mls_reddit_bot import aws
 from mls_reddit_bot import constants
-from mls_reddit_bot import s3
-try:
-    from mls_reddit_bot import log
-except:
-    import log
+from mls_reddit_bot import log
 
-
-# can be found here https://www.espn.com/soccer/competitions
-ESPN_SOCCER_LEAGUE_CODES = {
-    "usa.1":          "MLS",
-    "USA.NWSL":       "NWSL",
-    "uefa.champions": "UEFA Champions League",
-    "usa.open":       "U.S. Open Cup",
-    "concacaf.leagues.cup": "Leagues Cup",
-    "concacaf.league":      "Concacaf League",
-    "usa.usl.l1":           "USL League One",
-    "usa.usl.1":            "USL Championship",
-}
 
 def url_fetch_json(url):
     log.info(f'fetching from {url}')
@@ -53,7 +27,6 @@ class EspnEvent(object):
         self.venue = data['venue']
         self.links = data['links']
         self.prefer_cached = prefer_cached
-        # espn event: .competitions[0].competitors[0].team.abbreviation
         for team in self.competitions[0]['competitors']:
             if team['homeAway'].lower() == 'home':
                 self.home_team_abbrev = team['team']['abbreviation']
@@ -69,22 +42,10 @@ class EspnEvent(object):
 
     def fetch(self):
         # fetches match summary, which has the following top-level keys
-        #     article
-        #     boxscore
-        #     broadcasts
-        #     commentary
-        #     format
-        #     gameInfo
-        #     hasOdds
-        #     headToHeadGames
-        #     header
-        #     keyEvents
-        #     news
-        #     odds
-        #     pickcenter
-        #     rosters
-        #     standings
-        #     videos
+        #    article,    boxscore,  broadcasts, commentary
+        #    format,     gameInfo,  hasOdds,    headToHeadGames,
+        #    header,     keyEvents, news,       odds,
+        #    pickcenter, rosters,   standings, videos
         data = {}
         # TODO not hardcode usa.1 (if ever supporting non-mls)
         self.url = f'http://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/summary?event={self.id}'
@@ -92,7 +53,7 @@ class EspnEvent(object):
         s3_subdir = constants.AWS_S3_ESPN_SCOREBOARD_SUBDIR
         s3_file = f'cached-event-summary-{self.id}.json'
         if self.prefer_cached:
-            return s3.read_or_fetch_json(self.url, s3_bucket, f'{s3_subdir}/{s3_file}')
+            return aws.s3.read_or_fetch_json(self.url, s3_bucket, f'{s3_subdir}/{s3_file}')
         else:
             return url_fetch_json(self.url)
 
@@ -138,21 +99,6 @@ class EspnEvent(object):
             event_strings.append(event_str)
         return event_strings
 
-    def print_key_events(self):
-        print('Key events:')
-        events = self.summary['keyEvents']
-        for event in events:
-            time = event['clock']['displayValue']
-            try:
-                text = event['text']
-            except KeyError:
-                text = event['type']['text']
-            event_str = '* '
-            if time:
-                event_str += f'{time} '
-            event_str += text
-            print(event_str)
-
     def get_header(self):
         header = {}
         competitions = self.summary['header']['competitions']
@@ -186,9 +132,7 @@ class EspnEvent(object):
         if not self.header['boxscoreAvailable']:
             print('no box score available')
             return
-
         completed = self.header['status']['type']['completed']
-
         summary_text = ''
         t0 = self.header['competitors'][0]
         t0_abbrev = t0['team']['displayName']
@@ -196,7 +140,6 @@ class EspnEvent(object):
         t1 = self.header['competitors'][1]
         t1_abbrev = t1['team']['displayName']
         t1_score = t1.get('score', 'NaN')
-
         prefix = 'Final' if completed else 'In Progress' # TODO time
         print(f'{prefix}: {t0_abbrev} ({t0_score}) vs. {t1_abbrev} ({t1_score})')
 
@@ -210,38 +153,3 @@ class EspnEvent(object):
         for team in self.header['competitors']:
             if team['homeAway'].lower() == 'away':
                 return team['score']
-
-
-class EspnLeagueScoreboard(object):
-    def __init__(self, league_code, start=None, end=None, prefer_cached=False):
-        assert league_code in ESPN_SOCCER_LEAGUE_CODES.keys()
-        self.league_code = league_code
-        self.url = f'http://site.api.espn.com/apis/site/v2/sports/soccer/{self.league_code}/scoreboard'
-        if start or end:
-            if not (start and end):
-                raise Exception('cannot specify only one of start/end')
-            fmt = '%Y%m%d' # format used by ESPN's api, i.e. YYYYMMDD
-            self.url += f'?dates={start.strftime(fmt)}-{end.strftime(fmt)}'
-            self.start = start
-            self.end = end
-        s3_bucket = constants.AWS_S3_BUCKET_NAME
-        s3_subdir = constants.AWS_S3_ESPN_SCOREBOARD_SUBDIR
-        s3_file = f'cached-scoreboard-{league_code}-{start.strftime("%Y%m%d")}-{end.strftime("%Y%m%d")}.json'
-        s3_key = f'{s3_subdir}/{s3_file}'
-        self.prefer_cached = prefer_cached
-        if self.prefer_cached:
-            self.data = s3.read_or_fetch_json(self.url, s3_bucket, s3_key)
-        else:
-            self.data = url_fetch_json(self.url)
-            s3.write_json(s3_bucket, s3_key, self.data)
-        self.leagues = self.data['leagues'] # not much here, mainly logos
-        # "season": {
-        #     "type": 12328,
-        #     "year": 2024
-        # }
-        #self.season = self.data['season']
-        self.season = self.leagues[0]['season']
-        #self.day = dateutil.parser.parse(self.data['day']['date']) # e.g. 2024-03-23
-        self.events = [
-            EspnEvent(e, self.prefer_cached) for e in self.data['events']
-        ]

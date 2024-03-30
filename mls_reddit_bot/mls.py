@@ -10,13 +10,9 @@ import requests
 import dateutil
 import pytz
 
+from mls_reddit_bot import aws
 from mls_reddit_bot import constants
-from mls_reddit_bot import s3
-# this package
-try:
-    from mls_reddit_bot import log
-except:
-    import log
+from mls_reddit_bot import log
 
 
 class MlsMatchSummary(object):
@@ -80,7 +76,7 @@ def fetch_matches(start_dt, end_dt, tz, categories, force):
     subdir = constants.AWS_S3_MATCH_DATA_SUBDIR
     key = f'{subdir}/mls-matches-{start_str}_{end_str}.json'
     url=f"https://sportapi.mlssoccer.com/api/matches?culture=en-us&dateFrom={start_str}&dateTo={end_str}"
-    data = s3.read_or_fetch_json(url, bucket, key)
+    data = aws.s3.read_or_fetch_json(url, bucket, key)
 
     # filter
     result = []

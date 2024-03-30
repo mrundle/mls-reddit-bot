@@ -1,33 +1,21 @@
 #!/usr/bin/env python3
 
-# TODO move description to README.md, a lot of this is leftover from an early CLI version
-DESCRIPTION = f"""\
-This program fetches match details from the public MLS API for a given period
-of time. By default, it will use a window of -2 days and +5. To accept defaults,
-you can run the script with no arguments.
-
-As of writing, the MLS API is not publicly documented or committed to be
-maintained in its current form. API changes may change without warning, which
-will break this script. The MLS API currently also does not require
-authentication, which is something else that could change in the future.
-
-This script attempts to make as few calls as possible to the API. Results are
-cached to/from S3 for multiple repeated calls over the same window.
-"""
-
 import warnings
 warnings.filterwarnings('ignore')
 
 import json
+import praw
 
 # this package
-from mls_reddit_bot import constants
-from mls_reddit_bot import ddb
-from mls_reddit_bot import espn
-from mls_reddit_bot import log
-from mls_reddit_bot import mls
-from mls_reddit_bot import reddit
-from mls_reddit_bot import postbody
+from mls_reddit_bot import (
+    aws,
+    constants,
+    espn,
+    log,
+    mls,
+    postbody,
+    reddit,
+)
 
 
 def find_espn_data_for_match(mls_match, espn_scoreboard):
@@ -36,7 +24,7 @@ def find_espn_data_for_match(mls_match, espn_scoreboard):
                 and mls_match.away_team_abbrev == espn_event.away_team_abbrev:
                 log.info(f'found espn data for {mls_match.away_team_short} @ {mls_match.home_team_short}')
                 return espn_event
-    log.error(f'could not find espn data for {mls_match.away_team_short} @ {mls_match.home_team_short}')
+    log.warn(f'could not find espn data for {mls_match.away_team_short} @ {mls_match.home_team_short}')
     return None
 
 
@@ -45,16 +33,17 @@ def find_espn_data_for_match(mls_match, espn_scoreboard):
 #         in this case, we shouldn't try to recreate, and should mark as closed
 #    - mark thread closed after game ends, and leave it alone
 def process_match(mls_match, espn_scoreboard, reddit_cli, subreddit):
+    espn_data = find_espn_data_for_match(mls_match, espn_scoreboard)
+
     if mls_match.minutes_til_start() > constants.DEFAULT_MINUTES_TO_START:
         print(f'not processing {mls_match}, minutes_til_start={mls_match.minutes_til_start()}')
         return
 
-    ddb_entry = ddb.DdbGameThread(mls_match.id)
+    ddb_entry = aws.ddb.DdbGameThread(mls_match.id)
     if ddb_entry.error:
         log.error('failed to fetch game thread id from dynamodb')
         return
 
-    espn_data = find_espn_data_for_match(mls_match, espn_scoreboard)
     submission_id = ddb_entry.get_reddit_thread_id() # thread_id
     submission_title = postbody.get_submission_title(mls_match, espn_data)
     submission_body = postbody.get_submission_body(mls_match, espn_data)
@@ -88,7 +77,10 @@ def process_match(mls_match, espn_scoreboard, reddit_cli, subreddit):
         # now that we have the submission_id, recreate the body
         submission_body = postbody.get_submission_body(mls_match, espn_data, submission_id)
         submission = reddit_cli.submission(submission_id)
-        submission = submission.edit(submission_body)
+        try:
+            submission = submission.edit(submission_body)
+        except praw.exceptions.RedditAPIException as e:
+            log.error(f'failed to update {mls_match.id}, reddit exception: {e}')
         if espn_data.is_completed():
             log.info(f'Match {mls_match.id} is completed, posted final update')
             ddb_entry.set_game_completed()
@@ -123,14 +115,14 @@ def main(
     # mls match:
     # TODO scope to dates via URL like this:
     #    http://site.api.espn.com/apis/site/v2/sports/soccer/usa.1/scoreboard?dates=20240323-20240330
-    scoreboard = espn.EspnLeagueScoreboard(
+    scoreboard = espn.league.EspnLeagueScoreboard(
         "usa.1", # mls
         start=start,
         end=end,
         prefer_cached=prefer_cached_espn,
     )
 
-    reddit_cli = reddit.get_reddit_client()
-    subreddit = reddit_cli.subreddit(reddit.REDDIT_SUBREDDIT)
+    reddit_cli = reddit.client.get_reddit_client()
+    subreddit = reddit_cli.subreddit(constants.REDDIT_SUBREDDIT)
 
     process_matches(matches, scoreboard, reddit_cli, subreddit)
