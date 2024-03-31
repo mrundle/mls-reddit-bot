@@ -64,3 +64,17 @@ To run for a specific date and time:
 ```
 $ mls-reddit-bot-cli --start 2024-03-22 --end 2024-03-24 --prefer-cached-espn
 ```
+
+## Other Bots
+
+Other soccer match creation reddit bots:
+
+* CITY SC Bot
+  * https://github.com/acgabbert/citysc_bot
+  * Posts to r/stlouiscitysc
+  * Appears to fetch all data via mlssoccer.com rather than ESPN.
+  * Python3, docker
+* MatchThreadder Bot
+  * https://github.com/aarkay/match-thread-bot
+  * Used across a wide variety of subreddits. Utilizes an opt-in approach where users send messages to prompt a game thread
+  * Python2 and server-based, scrapes ESPN html rather than APIs
