@@ -19,7 +19,14 @@ def url_fetch_json(url):
 
 
 class EspnLeagueScoreboard(object):
-    def __init__(self, league_code, start=None, end=None, tz=constants.DEFAULT_TIMEZONE, prefer_cached=False):
+    def __init__(
+            self,
+            league_code,
+            start=None,
+            end=None,
+            tz=constants.DEFAULT_TIMEZONE,
+            prefer_cached=False,
+            espn_match_id=None):
         assert league_code in constants.ESPN_SOCCER_LEAGUE_CODES.keys()
         self.league_code = league_code
         self.url = f'http://site.api.espn.com/apis/site/v2/sports/soccer/{self.league_code}/scoreboard'
@@ -42,6 +49,11 @@ class EspnLeagueScoreboard(object):
         self.leagues = self.data['leagues'] # not much here, mainly logos
         self.season = self.leagues[0]['season']
         #self.day = dateutil.parser.parse(self.data['day']['date']) # e.g. 2024-03-23
+
+        if espn_match_id:
+            events_to_fetch = [e for e in self.data['events'] if str(e['id']) == str(espn_match_id)]
+        else:
+            events_to_fetch = self.data['events']
         self.events = [
-            EspnEvent(e, tz=tz, prefer_cached=self.prefer_cached) for e in self.data['events']
+            EspnEvent(e, tz=tz, prefer_cached=self.prefer_cached) for e in events_to_fetch
         ]

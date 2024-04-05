@@ -65,6 +65,24 @@ To run for a specific date and time:
 $ mls-reddit-bot-cli --start 2024-03-22 --end 2024-03-24 --prefer-cached-espn
 ```
 
+To run for a specific ESPN match ID:
+
+```
+mls-reddit-bot-cli --minutes-early 4000 --espn-match-id 692699
+```
+
+To dry run (no reddit posts) for the default time window and see which actions would have been taken:
+
+```
+mls-reddit-bot-cli --dry-run
+```
+
+To force a reddit thread update for a match that's already been completed:
+
+```
+mls-reddit-bot-cli --espn-match-id 692675 --start 2024-03-30 --end 2024-03-30 --force-update
+```
+
 ## Other Bots
 
 Other soccer match creation reddit bots:

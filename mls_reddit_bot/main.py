@@ -16,7 +16,7 @@ from mls_reddit_bot import (
 )
 
 
-def process_match(event, reddit_cli, subreddit, minutes_early):
+def process_match(event, reddit_cli, subreddit, minutes_early, dryrun=False, force_update=False):
     if event.minutes_til_start() > minutes_early:
         print(f'not processing {event}, minutes_til_start={event.minutes_til_start()}')
         return
@@ -31,6 +31,9 @@ def process_match(event, reddit_cli, subreddit, minutes_early):
     submission_body = postbody.get_submission_body(event)
 
     if not submission_id:
+        if dryrun:
+            log.info(f'DRYRUN: Would have posted match thread for {event}')
+            return
         submission = subreddit.submit(title=submission_title, selftext=submission_body)
         if not ddb_entry.update_reddit_thread_id(submission.id):
             # TODO: s3 for backup? or query reddit for recently created
@@ -41,24 +44,31 @@ def process_match(event, reddit_cli, subreddit, minutes_early):
         log.info(f'Posted match thread for {event}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission.id}')
     else:
         """
-        TODO:
-            1. after game ends, maybe lock post and create post-match
-            thread. similarly, ddb should be updated with this info
+        TODO: Potentially lock post and create post-match thread.
+        Post-match thread should be linked in overview and added as a comment.
+        Post-match thread should be tagged to the DDB match entry.
         """
-        if ddb_entry.is_game_completed():
+        if ddb_entry.is_game_completed() and not force_update:
             log.info(f'Game completed, skipping match thread update for {event}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission_id}')
             return
-        log.info(f'Updating match thread for {event}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission_id}')
-        # now that we have the submission_id, recreate the body
-        submission_body = postbody.get_submission_body(event, submission_id)
-        submission = reddit_cli.submission(submission_id)
-        try:
-            submission = submission.edit(submission_body)
-        except praw.exceptions.RedditAPIException as e:
-            log.error(f'failed to update {event}, reddit exception: {e}')
+        elif dryrun:
+            log.info(f'DRYRUN: Would have updated match thread for {event} to https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission_id}')
+        else:
+            log.info(f'Updating match thread for {event}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission_id}')
+            # now that we have the submission_id, recreate the body
+            submission_body = postbody.get_submission_body(event, submission_id)
+            submission = reddit_cli.submission(submission_id)
+            try:
+                submission = submission.edit(submission_body)
+            except praw.exceptions.RedditAPIException as e:
+                log.error(f'failed to update {event}, reddit exception: {e}')
+
         if event.completed:
-            log.info(f'Match {event} is completed, posted final update')
-            ddb_entry.set_game_completed()
+            if dryrun:
+                log.info(f'DRYRUN: Match completed, would have been final update for {event}')
+            else:
+                log.info(f'Match {event} is completed, posted final update')
+                ddb_entry.set_game_completed()
 
 
 def main(
@@ -68,7 +78,10 @@ def main(
             minutes_early=constants.DEFAULT_MINUTES_TO_START,
             categories=constants.DEFAULT_MLS_CATEGORIES,
             force_fetch_mls=False,
-            prefer_cached_espn=False
+            prefer_cached_espn=False,
+            espn_match_id=None,
+            dryrun=False,
+            force_update=False,
         ):
 
     scoreboard = espn.league.EspnLeagueScoreboard(
@@ -77,14 +90,23 @@ def main(
         end=end,
         tz=tz,
         prefer_cached=prefer_cached_espn,
+        espn_match_id=espn_match_id,
     )
 
     reddit_cli = reddit.client.get_reddit_client()
     subreddit = reddit_cli.subreddit(constants.REDDIT_SUBREDDIT)
 
     for event in scoreboard.events:
+        if espn_match_id and espn_match_id != event.id:
+            continue
         try:
-            process_match(event, reddit_cli, subreddit, minutes_early)
+            process_match(
+                event,
+                reddit_cli,
+                subreddit,
+                minutes_early,
+                dryrun=dryrun,
+                force_update=force_update)
         except Exception as e:
             log.exception(f'caught error while handling {event}', e)
             exit(1)

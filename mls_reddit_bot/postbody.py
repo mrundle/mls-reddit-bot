@@ -18,8 +18,12 @@ def _get_bot_footer():
 def _get_key_event_text(event):
     text = ''
     text += f'**Match events via [ESPN](https://www.espn.com/soccer/match?gameId={event.id})**\n\n'
-    for event in event.get_key_events():
-        text += f'* {event}\n\n'
+    events = event.get_key_events()
+    if events:
+        for event in event.get_key_events():
+            text += f'* {event}\n\n'
+    else:
+        text += '*Not yet available*\n\n'
     return text
 
 def _player_str(player):
@@ -32,19 +36,21 @@ def _player_str(player):
     return f'{name}, #{number}|{position}'
 
 def _get_lineups(event):
-    text = ''
-    text += '**Lineups**\n\n'
-    team_a = event.rosters[0]['team']['displayName']
-    team_b = event.rosters[1]['team']['displayName']
-    players_a = list(reversed(event.rosters[0]['roster']))
-    players_b = list(reversed(event.rosters[1]['roster']))
-    text += f'| |**{team_a}**|Pos| |**{team_b}**|Pos|\n'
-    text += f'|-|:-----------|:--|-|:-----------|:--|{team_b}|\n'
-    while players_a or players_b:
-        a = None if not players_a else players_a.pop()
-        b = None if not players_b else players_b.pop()
-        text += f'||{_player_str(a)}||{_player_str(b)}|\n'
-    text += '\n'
+    text = '**Lineups**\n\n'
+    try:
+        team_a = event.rosters[0]['team']['displayName']
+        team_b = event.rosters[1]['team']['displayName']
+        players_a = list(reversed(event.rosters[0]['roster']))
+        players_b = list(reversed(event.rosters[1]['roster']))
+        text += f'| |**{team_a}**|Pos| |**{team_b}**|Pos|\n'
+        text += f'|-|:-----------|:--|-|:-----------|:--|{team_b}|\n'
+        while players_a or players_b:
+            a = None if not players_a else players_a.pop()
+            b = None if not players_b else players_b.pop()
+            text += f'||{_player_str(a)}||{_player_str(b)}|\n'
+        text += '\n'
+    except:
+        text += '*Not yet available*\n\n'
     return text
 
 def _get_match_summary(event, submission_id=None):

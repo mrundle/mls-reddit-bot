@@ -223,13 +223,15 @@ class EspnEvent(object):
         prefix = 'Final' if completed else 'In Progress' # TODO time
         print(f'{prefix}: {t0_abbrev} ({t0_score}) vs. {t1_abbrev} ({t1_score})')
 
+    def _team_score(self, homeaway):
+        if self.display_status.lower() == 'scheduled':
+            return '-'
+        for team in self.header['competitors']:
+            if team['homeAway'].lower() == homeaway.lower():
+                return team.get('score', 0)
 
     def home_team_score(self):
-        for team in self.header['competitors']:
-            if team['homeAway'].lower() == 'home':
-                return team.get('score', 0)
+        return self._team_score('home')
 
     def away_team_score(self):
-        for team in self.header['competitors']:
-            if team['homeAway'].lower() == 'away':
-                return team.get('score', 0)
+        return self._team_score('away')

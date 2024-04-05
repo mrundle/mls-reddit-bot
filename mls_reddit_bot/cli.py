@@ -45,6 +45,16 @@ def parse_args():
                         default=constants.DEFAULT_MINUTES_TO_START,
                         type=int,
                         help="post the match thread N minutes before match start")
+    parser.add_argument("--espn-match-id",
+                        help="Run for a specific match id")
+    parser.add_argument("--dry-run",
+                        action='store_true',
+                        default=False,
+                        help="Don't actually post to reddit")
+    parser.add_argument("--force-update",
+                        action='store_true',
+                        default=False,
+                        help="force update of reddit thread even if match is complete")
     #parser.add_argument("-d", "--debug",
     #                    action='store_true',
     #                    help="show debug log messages")
@@ -75,4 +85,7 @@ def cli_main():
         minutes_early=args.minutes_early,
         force_fetch_mls=args.force_fetch_mls,
         prefer_cached_espn=args.prefer_cached_espn,
+        espn_match_id=args.espn_match_id,
+        dryrun=args.dry_run,
+        force_update=args.force_update,
     )

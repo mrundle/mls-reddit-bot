@@ -34,6 +34,9 @@ cities_timezones = {
     "Commerce City, Colorado": "America/Denver",
     "Carson, California": "America/Los_Angeles",  # Adding Carson for LA Galaxy
     "Chester, Pennsylvania": "America/New_York",  # Adding Chester for Philadelphia Union
+    # Manual updates that chatgpt missed
+    "Saint Paul, Minnesota": "America/Chicago",
+    "Foxborough, Massachusetts": "America/New_York",
 }
 
 # Function to get timezone for a given city using fuzzy matching
