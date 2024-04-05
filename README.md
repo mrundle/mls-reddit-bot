@@ -3,7 +3,8 @@ Reddit bot for r/MLS using ESPN API data to create and maintain match threads. A
 
 ## Output
 
-https://www.reddit.com/r/MLS_Reddit_Bot/
+Main subreddit: https://www.reddit.com/r/MLS
+Test subreddit: https://www.reddit.com/r/MLS_Reddit_Bot/
 
 ## Build and usage notes
 
