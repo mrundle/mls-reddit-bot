@@ -33,10 +33,6 @@ def parse_args():
     parser.add_argument("--show-timezones",
                         action='store_true',
                         help="list all valid timezone strings and exit")
-    parser.add_argument("--force-fetch-mls",
-                        action='store_true',
-                        default=False,
-                        help="force fetch of MLS data (disabled by default)")
     parser.add_argument("--prefer-cached-espn",
                         action='store_true',
                         default=False,
@@ -47,6 +43,9 @@ def parse_args():
                         help="post the match thread N minutes before match start")
     parser.add_argument("--espn-match-id",
                         help="Run for a specific match id")
+    parser.add_argument("--subreddit",
+                        default=constants.REDDIT_SUBREDDIT,
+                        help="subreddit to post to")
     parser.add_argument("--dry-run",
                         action='store_true',
                         default=False,
@@ -82,8 +81,8 @@ def cli_main():
         start=args.start,
         end=args.end,
         tz=args.tz,
+        subreddit_name=args.subreddit,
         minutes_early=args.minutes_early,
-        force_fetch_mls=args.force_fetch_mls,
         prefer_cached_espn=args.prefer_cached_espn,
         espn_match_id=args.espn_match_id,
         dryrun=args.dry_run,
