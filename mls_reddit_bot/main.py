@@ -18,7 +18,7 @@ from mls_reddit_bot import (
 
 def process_match(event, reddit_cli, subreddit, minutes_early, dryrun=False, force_update=False):
     if event.minutes_til_start() > minutes_early:
-        print(f'not processing {event}, minutes_til_start={event.minutes_til_start()}')
+        log.info(f'not processing {event}, minutes_til_start={event.minutes_til_start()}')
         return
 
     ddb_entry = aws.ddb.DdbGameThread(event)
@@ -61,7 +61,7 @@ def process_match(event, reddit_cli, subreddit, minutes_early, dryrun=False, for
             try:
                 submission = submission.edit(submission_body)
             except praw.exceptions.RedditAPIException as e:
-                log.error(f'failed to update {event}, reddit exception: {e}')
+                log.exception(f'failed to update reddit for {event}')
 
         if event.completed:
             if dryrun:
@@ -82,7 +82,14 @@ def main(
             espn_match_id=None,
             dryrun=False,
             force_update=False,
+            debug=False,
         ):
+
+    log.setup_logger(debug=debug)
+
+    reddit_cli = reddit.client.get_reddit_client()
+    subreddit = reddit_cli.subreddit(subreddit_name)
+    log.info(f'Subreddit: r/{subreddit_name}')
 
     scoreboard = espn.league.EspnLeagueScoreboard(
         "usa.1", # mls
@@ -92,9 +99,6 @@ def main(
         prefer_cached=prefer_cached_espn,
         espn_match_id=espn_match_id,
     )
-
-    reddit_cli = reddit.client.get_reddit_client()
-    subreddit = reddit_cli.subreddit(subreddit_name)
 
     for event in scoreboard.events:
         if espn_match_id and espn_match_id != event.id:
@@ -108,5 +112,5 @@ def main(
                 dryrun=dryrun,
                 force_update=force_update)
         except Exception as e:
-            log.exception(f'caught error while handling {event}', e)
+            log.exception(f'caught error while handling {event}')
             exit(1)

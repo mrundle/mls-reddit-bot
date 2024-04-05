@@ -1,25 +1,33 @@
-# TODO use logging, log formatting (file/func/line for error, etc.)
-
 import sys
 import logging
 
-DEBUG_LOGGING = True
+class CustomFormatter(logging.Formatter):
+    def format(self, record):
+        if record.levelno >= logging.ERROR:
+            self._style._fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
+        else:
+            self._style._fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        return super().format(record)
 
-def _log(lvl, msg):
-    sys.stderr.write(f'{lvl.upper()}: {msg}\n')
+def setup_logger(debug=False):
+    logging.getLogger().handlers.clear()
+    handler = logging.StreamHandler() # defaults to stderr
+    handler.setFormatter(CustomFormatter())
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG if debug else logging.INFO)
+    logger.addHandler(handler)
 
 def error(msg):
-    _log('ERROR', msg)
+    logging.error(msg)
 
-def exception(msg, exception):
-    logging.error(f'{msg}: {exception}', exc_info=True)
+def exception(msg):
+    logging.exception(msg)
 
 def warn(msg):
-    _log('WARNING', msg)
+    logging.warning(msg)
 
 def info(msg):
-    _log('INFO', msg)
+    logging.info(msg)
 
 def debug(msg):
-    if DEBUG_LOGGING:
-        _log('DEBUG', msg)
+    logging.debug(msg)

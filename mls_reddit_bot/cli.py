@@ -54,9 +54,9 @@ def parse_args():
                         action='store_true',
                         default=False,
                         help="force update of reddit thread even if match is complete")
-    #parser.add_argument("-d", "--debug",
-    #                    action='store_true',
-    #                    help="show debug log messages")
+    parser.add_argument("-d", "--debug",
+                        action='store_true',
+                        help="show debug log messages")
     args = parser.parse_args()
     args.start = dateutil.parser.parse(args.start)
     args.end = dateutil.parser.parse(args.end)
@@ -87,4 +87,5 @@ def cli_main():
         espn_match_id=args.espn_match_id,
         dryrun=args.dry_run,
         force_update=args.force_update,
+        debug=args.debug,
     )
