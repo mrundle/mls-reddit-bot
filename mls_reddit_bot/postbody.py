@@ -12,7 +12,7 @@ def _get_bot_footer():
     tz = pytz.timezone('US/Central')
     ts = datetime.datetime.now().astimezone(tz).strftime("%Y-%m-%d %H:%M:%S %Z")
     text = ''
-    text += f'^(This thread is managed by a bot running on AWS Lambda and using ESPN APIs. Issues or feature requests can be submitted) [^( via github.)](https://github.com/mrundle/mls-reddit-bot/issues/new/choose) ^(This post was last updated at {ts}.)'
+    text += f'^(This thread is managed by a bot running on AWS Lambda. All data is sourced from ESPN APIs. The project can be found on GitHub at ) [^( mrundle/mls-reddit-bot.)](https://github.com/mrundle/mls-reddit-bot) ^( This post was last updated at {ts}.)'
     return text
 
 def _get_key_event_text(event):
