@@ -41,7 +41,7 @@ def process_match(event, reddit_cli, subreddit, minutes_early, dryrun=False, for
             # if the new text is significantly (or any) shorter than the old
             log.error('failed to update ddb with reddit thread '
                       'for {event}, duplicates inbound...')
-        log.info(f'Posted match thread for {event}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission.id}')
+        log.info(f'Posted match thread for {event}: https://www.reddit.com/r/{constants.REDDIT_SUBREDDIT}/comments/{submission.id}')
     else:
         """
         TODO: Potentially lock post and create post-match thread.
@@ -49,12 +49,12 @@ def process_match(event, reddit_cli, subreddit, minutes_early, dryrun=False, for
         Post-match thread should be tagged to the DDB match entry.
         """
         if ddb_entry.is_game_completed() and not force_update:
-            log.info(f'Game completed, skipping match thread update for {event}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission_id}')
+            log.info(f'Game completed, skipping match thread update for {event}: https://www.reddit.com/r/{constants.REDDIT_SUBREDDIT}/comments/{submission_id}')
             return
         elif dryrun:
-            log.info(f'DRYRUN: Would have updated match thread for {event} to https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission_id}')
+            log.info(f'DRYRUN: Would have updated match thread for {event} to https://www.reddit.com/r/{constants.REDDIT_SUBREDDIT}/comments/{submission_id}')
         else:
-            log.info(f'Updating match thread for {event}: https://www.reddit.com/r/MLS_Reddit_Bot/comments/{submission_id}')
+            log.info(f'Updating match thread for {event}: https://www.reddit.com/r/{constants.REDDIT_SUBREDDIT}/comments/{submission_id}')
             # now that we have the submission_id, recreate the body
             submission_body = postbody.get_submission_body(event, submission_id)
             submission = reddit_cli.submission(submission_id)
