@@ -7,6 +7,7 @@ from mls_reddit_bot import log
 DDB = boto3.client('dynamodb')
 
 class DdbGameThread(object):
+
     def __init__(self, event):
         self.table_name = constants.AWS_DDB_TABLE_NAME
         self.match_date_id_field = 'match_date'
@@ -20,6 +21,7 @@ class DdbGameThread(object):
             },
         }
         self.item, self.error = self.fetch()
+
 
     def fetch(self):
         response = DDB.get_item(
@@ -41,8 +43,6 @@ class DdbGameThread(object):
             not success,
         )
 
-    def needs_creation(self):
-        return not self.item and not self.error
 
     def create(self):
         if self.error:
@@ -79,85 +79,77 @@ class DdbGameThread(object):
 
         return success
 
+
+    def _update_field(
+            self,
+            key: str,
+            val: str,
+            valtype: str = 'S'
+        ) -> bool:
+        """
+        Update a field.
+        On success, returns True and updates self.item.
+        On failure, returns False.
+        """
+        try:
+            response = DDB.update_item(
+                TableName=self.table_name,
+                Key=self.key,
+                UpdateExpression=f'SET {key} = :val',
+                ExpressionAttributeValues={
+                    ':val': {
+                        valtype: val,
+                    },
+                },
+                ReturnValues='ALL_NEW', # returns entire item
+            )
+            if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+                self.item = response['Attributes']
+                return True
+        except Exception as e:
+            log.exception(f'failed to update ddb table {key}={val}')
+            return False
+
+
     def update_reddit_thread_id(self, submission_id):
         if self.get_reddit_thread_id() == submission_id:
             return True # already set, skip duplicate
+        return self._update_field(self.reddit_thread_id_field, submission_id)
 
-        item = {
-            'id': {
-                'S': str(self.event_id),
-            },
-            self.reddit_thread_id_field: {
-                'S': str(submission_id),
-            },
-            self.match_date_id_field: {
-                'S': self.event.date_str,
-            },
-            self.game_completed_field: {
-                'BOOL': False,
-            }
-        }
-        response = DDB.put_item(
-            TableName=self.table_name,
-            Item=item,
-        )
-        try:
-            if response['ResponseMetadata']['HTTPStatusCode'] == 200:
-                self.item = item
-                return True
-        except:
-            log.error(f'ddb: failed to set reddit submission id to '
-                      f'{submission_id} for match id {self.event_id}')
-            return False
 
     def get_reddit_thread_id(self):
         return self.item.get(self.reddit_thread_id_field, {}).get('S', None)
 
-    def set_game_completed(self):
+
+    def set_game_completed(self, completed: str = True):
         submission_id = self.get_reddit_thread_id()
         if not submission_id:
             log.error(f'refusing to issue game completion put, no reddit thread')
             return False
-        # TODO merge with other put_item logic
-        item = {
-            'id': {
-                'S': str(self.event_id),
-            },
-            self.reddit_thread_id_field: {
-                'S': str(submission_id),
-            },
-            self.match_date_id_field: {
-                'S': self.event.date_str,
-            },
-            self.game_completed_field: {
-                'BOOL': self.event.completed,
-            },
-        }
-        response = DDB.put_item(
-            TableName=self.table_name,
-            Item=item,
-        )
-        try:
-            if response['ResponseMetadata']['HTTPStatusCode'] == 200:
-                self.item = item
-                return True
-        except:
-            log.error(f'ddb: failed to set {self.game_completed_field}=True '
-                      f'for match id {self.event_id}')
-            return False
+        return self._update_field(self.game_completed_field, completed, 'BOOL')
+
 
     def is_game_completed(self):
         return self.item.get(self.game_completed_field, {}).get('BOOL', False)
 
 
+
 if __name__ == '__main__':
+    class DummyEvent:
+        def __init__(self, id):
+            self.id = id
+            self.date_str = '2025-01-01'
+
     for match_id in [
-            'fake-1',
-            'fake-2',
+            DummyEvent('fake-1'),
+            DummyEvent('fake-2'),
         ]:
         g = DdbGameThread(match_id)
         rti = g.get_reddit_thread_id()
         if rti:
+            g._update_field('match_date', '2026-12-12')
+            g.update_reddit_thread_id('testing-value')
+            g.set_game_completed(False)
             print(f'reddit thread id for match {match_id} is {rti}')
         else:
             rti = 'some-reddit-id' # reddit.create_submission(...)
