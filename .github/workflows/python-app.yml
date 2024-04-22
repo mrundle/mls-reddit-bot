@@ -25,7 +25,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: $PYTHONVER
+        python-version: "${{ env.PYTHONVER }}"
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -38,7 +38,7 @@ jobs:
       run: >-
         export DISTUTILS_DEBUG=1;
         for i in $$(seq 1 5); do
-          if python3 setup.py ldist --build-layer=True --layer-dir=python/lib/python$PYTHONVER/site-packages; then
+          if python3 setup.py ldist --build-layer=True --layer-dir=python/lib/python${PYTHONVER}/site-packages; then
             echo "SUCCESS: lambda layer .zip created";
             exit 0;
           fi;
