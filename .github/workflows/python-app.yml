@@ -55,7 +55,7 @@ jobs:
         pytest
     - name: Release
       uses: softprops/action-gh-release@v2
-      #if: startsWith(github.ref, 'refs/tags/')
+      if: startsWith(github.ref, 'refs/tags/')
       with:
         files: dist/mls_reddit_bot-1.0.0.zip
 
