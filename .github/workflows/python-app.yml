@@ -53,3 +53,9 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+    - name: Upload lambda layer .zip artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: mls_reddit_bot-lambda-layer-1.0.0.zip
+        path: dist/mls_reddit_bot-1.0.0.zip
+
