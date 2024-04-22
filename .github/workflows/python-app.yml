@@ -37,7 +37,7 @@ jobs:
     - name: Full build
       run: >-
         export DISTUTILS_DEBUG=1;
-        for i in $$(seq 1 5); do
+        for i in $(seq 1 5); do
           if python3 setup.py ldist --build-layer=True --layer-dir=python/lib/python${PYTHONVER}/site-packages; then
             echo "SUCCESS: lambda layer .zip created";
             exit 0;
