@@ -6,7 +6,7 @@ import pytz
 import datetime
 
 def get_submission_title(event):
-    return f'Match Thread: {event.away_team_fullname} @ {event.home_team_fullname}'
+    return f'Match Thread: {event.home_team_fullname} vs. {event.away_team_fullname}'
 
 def _get_bot_footer():
     tz = pytz.timezone('US/Central')
