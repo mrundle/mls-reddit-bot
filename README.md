@@ -10,7 +10,7 @@ Test subreddit: https://www.reddit.com/r/MLS_Reddit_Bot/
 
 To build and package locally, you may need to install python dependencies:
 ```
-python3 -m pip install setuptools lambda-setuptools praw dateutils pytest pytz
+python3 -m pip install setuptools lambda-setuptools praw dateutils pytest pytz fuzzywuzzy
 ```
 
 Next, build:
